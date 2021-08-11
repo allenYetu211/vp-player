@@ -1,0 +1,122 @@
+:global {
+  controls {
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.playerInfo {
+  width: 200px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+.controls {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 1);
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.controlsLeft,
+.controlsRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tipSwitch1,
+.tipSwitch2 {
+  min-width: 100px;
+}
+
+.iconSwitch1,
+.tipSwitch1 {
+  display: block;
+}
+.iconSwitch2,
+.tipSwitch2 {
+  display: none;
+}
+
+.tips {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 100%;
+  transition: all 0.2s ease-in;
+}
+
+.operate {
+  position: relative;
+  &:hover {
+    .tips {
+      transform: translate(-50%, -90%);
+      opacity: 1;
+    }
+  }
+}
+
+// .iconPlay,
+// .tipPlay {
+//   display: none;
+// }
+// .iconPause,
+// .tipPause {
+//   display: block;
+// }
+
+// 功能开关键控制
+.playing {
+  .iconPlay,
+  .tipPlay {
+    display: none;
+  }
+  .iconPause,
+  .tipPause {
+    display: block;
+  }
+  &.pause {
+    .iconPlay,
+    .tipPlay {
+      display: block;
+    }
+    .iconPause,
+    .tipPause {
+      display: none;
+    }
+  }
+}
+
+.fullscreen {
+  .iconFullscreen,
+  .tipFullscreen {
+    display: none;
+  }
+  .iconExitFullscreen,
+  .tipExitFullscreen {
+    display: block;
+  }
+}

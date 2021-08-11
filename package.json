@@ -1,0 +1,24 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "dev": "lerna run dev",
+    "node-start": "node app.js",
+    "start": "concurrently \"yarn run dev\" \"yarn run node-start\""
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "type": "module",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "koa": "^2.13.1",
+    "koa-range": "^0.3.0",
+    "koa-static": "^5.0.0",
+    "ts-loader": "^9.2.4"
+  }
+}
