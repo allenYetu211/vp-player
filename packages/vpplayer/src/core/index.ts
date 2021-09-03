@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2021-07-31 16:46:47
+ * @LastEditTime: 2021-08-30 15:57:13
  * @FilePath: /plugin-core/packages/vpplayer/src/core/index.ts
  */
 
@@ -87,10 +87,9 @@ class Player extends Proxy {
 
   videoStateOrder = {
     canPlayFunc: () => {
-      const playPromise = this.video.play()
+      const playPromise = this.play()
       if (playPromise !== undefined && playPromise) {
         playPromise.then(() => {
-
           console.log('>>> playPromise autoplay started')
           this.emit('autoplay started')
         }).catch(() => {
@@ -107,13 +106,12 @@ class Player extends Proxy {
     if (!url || url === '') {
       this.emit('urlNull')
     }
-    this.video.src = url
+    this.video.src = url;
     this.root.insertBefore(this.video, this.root.firstChild)
     if (this.config.autoplay) {
       this.videoStateOrder.canPlayFunc()
     }
   }
-
 
   play() {
     this.onPlay()

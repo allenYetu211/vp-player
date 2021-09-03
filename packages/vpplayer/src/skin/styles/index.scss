@@ -43,11 +43,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  & > vp-play,
+  & > vp-play-time,
+  & > vp-multiresolution,
+  & > vp-volume,
+  & > vp-fullscreen {
+    padding: 0 5px;
+  }
 }
 
 .tipSwitch1,
 .tipSwitch2 {
   min-width: 100px;
+}
+
+.iconSwitch1,
+.iconSwitch2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .iconSwitch1,

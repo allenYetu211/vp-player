@@ -2,14 +2,16 @@
  * @Author: Allen OYang
  * @Date: 2021-07-08 17:16:07
  * @Descripttion: 
- * @LastEditTime: 2021-08-02 11:02:53
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/cnotrols/play/index.ts
+ * @LastEditTime: 2021-09-03 17:20:13
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/play/index.ts
  */
 
 import Player from '@/core';
 import { createDOM, findDom } from '@/util';
-import PlayIcon from '@/skin/assets/play.svg';
-import PauseIcon from '@/skin/assets/pause.svg';
+// import PlayIcon from '@/skin/assets/play.svg';
+import PlayIcon from '@/skin/assets/iconplay.svg';
+// import PauseIcon from '@/skin/assets/pause.svg';
+import PauseIcon from '@/skin/assets/iconpause.svg';
 import style from '@/skin/styles/index.scss';
 import cn from 'classname';
 

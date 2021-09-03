@@ -2,22 +2,27 @@
  * @Author: Allen OYang
  * @Date: 2021-07-21 18:43:16
  * @Descripttion: 
- * @LastEditTime: 2021-08-02 11:01:53
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/cnotrols/fullScreen/index.ts
+ * @LastEditTime: 2021-09-03 17:30:57
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/fullScreen/index.ts
  */
 
 
 
 import Player from '@/core';
 import { createDOM, findDom } from '@/util';
-import requestFull from '@/skin/assets/requestFull.svg';
-import exitFullIcon from '@/skin/assets/exitFull.svg';
+
+// import requestFull from '@/skin/assets/requestFull.svg';
+// import exitFullIcon from '@/skin/assets/exitFull.svg';
+
+import requestFull from '@/skin/assets/iconrequestFull.svg';
+import exitFullIcon from '@/skin/assets/iconexitFull.svg';
+
 import style from '@/skin/styles/index.scss';
 import cn from 'classname';
 
 const skin_fullScreen = function () {
 
-  let btn: Element = createDOM({
+  const btnEl: Element = createDOM({
     el: 'vp-fullScreen',
     tpl: `<div class="${style.icon}">
     <div class="${cn(style.iconFullscreen, style.iconSwitch1)}">${requestFull}</div>
@@ -38,15 +43,15 @@ const skin_fullScreen = function () {
     cname: style.tips,
   })
 
-  btn.appendChild(tips);
+  btnEl.appendChild(tips);
 
   this.once('ready', () => {
     const controlsRight = findDom(this.controls, 'vp-controls-right');
-    controlsRight.appendChild(btn);
+    controlsRight.appendChild(btnEl);
   });
 
   ['click', 'touchend'].forEach(item => {
-    btn.addEventListener(item, (e) => {
+    btnEl.addEventListener(item, (e) => {
       e.preventDefault()
       e.stopPropagation()
       this.emit('fullScreenBtnClick')

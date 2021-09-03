@@ -1,0 +1,31 @@
+.multiResolutionContainer {
+  position: relative;
+  &:hover {
+    .switchUl {
+      display: block;
+    }
+  }
+}
+
+.multiResolution {
+  // padding: 0 20px;
+  height: 37px;
+  line-height: 37px;
+  cursor: none;
+}
+
+.switchUl {
+  display: none;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, -95%);
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+  z-index: 9;
+
+  cursor: pointer;
+}

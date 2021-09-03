@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-07-31 16:09:53
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/cnotrols/progress/index.ts
+ * @LastEditTime: 2021-08-30 15:54:25
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/progress/index.ts
  */
 
 import Player from '@/core';
@@ -102,7 +102,6 @@ const skin_progress = function () {
 
         progressPlayed.style.width = moveTate;
         btn.style.left = moveTate;
-        console.log('moveTate', moveTate);
       }
 
       const up = (event: MouseEvent) => {
@@ -150,6 +149,15 @@ const skin_progress = function () {
     containerEl.addEventListener('mousemove', move, false);
     containerEl.addEventListener('mouseleave', leave, false);
   });
+
+  /**
+   * 重置样式
+   */
+  this.on('reSetStyle', () => {
+    progressPlayed.style.width = '0';
+    cache.style.width = '0';
+    btn.style.left = '0';
+  })
   // });
 }
 
