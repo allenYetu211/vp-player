@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 17:44:10
  * @Descripttion: 
- * @LastEditTime: 2021-07-31 12:57:12
+ * @LastEditTime: 2021-09-06 11:35:53
  * @FilePath: /plugin-core/packages/vpplayer/src/util/index.ts
  */
 
@@ -24,7 +24,9 @@ export const createDOM = ({
   cname = ''
 }: createDom) => {
   const dom = document.createElement(el);
-  dom.className = cname
+  if (cname) {
+    dom.className = cname;
+  }
   dom.innerHTML = tpl
   Object.keys(attrs).forEach(item => {
     const key = item

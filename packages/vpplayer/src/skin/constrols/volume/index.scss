@@ -1,9 +1,90 @@
 .volume {
   position: relative;
+  &:hover {
+    .volumeContent {
+      transform: translate3d(-50%, -100%, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
 
 .vp-volume-content {
   position: absolute;
   left: 0;
   top: -100%;
+}
+
+.volumeLarge {
+  position: static;
+}
+
+.volumeMuted {
+  position: static;
+}
+
+.volumeContent {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transition: all 0.5s;
+  transform: translate3d(-50%, -90%, 0);
+  opacity: 0;
+
+  pointer-events: none;
+
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 3px;
+  padding: 5px 10px;
+  text-align: center;
+  z-index: 10;
+  width: 40px;
+
+  vp-volume-text {
+    font-size: 12px;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    height: 10px;
+    width: 100%;
+  }
+}
+
+.volumeBar {
+  position: relative;
+  display: block;
+  height: 100px;
+  width: 5px;
+  margin: 5px auto;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.volumeDrag {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 3px;
+
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

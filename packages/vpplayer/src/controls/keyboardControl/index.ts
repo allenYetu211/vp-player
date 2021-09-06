@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-30 16:21:40
  * @Descripttion:
- * @LastEditTime: 2021-09-03 17:02:09
+ * @LastEditTime: 2021-09-06 14:21:27
  * @FilePath: /plugin-core/packages/vpplayer/src/controls/keyboardControl/index.ts
  */
 
@@ -14,8 +14,6 @@ const keyboardControl = function (this: Player) {
 
     const e: KeyboardEvent = event;
     const keyCode = e.keyCode;
-    console.log(keyCode);
-
     switch (keyCode) {
       // 快进
       case 39: {
