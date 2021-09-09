@@ -2,18 +2,23 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2021-08-30 15:29:50
+ * @LastEditTime: 2021-09-08 15:50:40
  * @FilePath: /plugin-core/examples/index.js
  */
 
 
 const pl = document.querySelector('#video');
 
-const player = new Player({
+const config = {
   el: pl,
   type: 'mp4',
   url: 'https://testdevcdn.xylink.com/test-video/xg360.mp4',
   autoplay: false,
+  playbackRate: {
+    rate: [0.5, 1, 2, 3],
+    placeholder: 'X',
+    defaultPlaybackRate: 1,
+  },
   multiResolution: {
     list: [{
       text: '标清',
@@ -28,7 +33,9 @@ const player = new Player({
     defaultInit: 0
   }
 
-});
+}
+
+const player = new Player(config);
 
 
 

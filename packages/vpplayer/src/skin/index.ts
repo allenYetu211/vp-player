@@ -14,3 +14,4 @@ import './constrols/progress';
 import './constrols/playTime';
 import './constrols/volume';
 import './constrols/multiResolution';
+import './constrols/doubleSpeed';

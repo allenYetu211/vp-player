@@ -1,0 +1,78 @@
+@import '../../styles/mixin.scss';
+
+.container {
+  position: relative;
+}
+
+.selected {
+  color: red;
+}
+
+.ulContainer {
+  width: 60px;
+
+  // transform: translate(0, -115%);
+}
+
+.currentPitchOn {
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/*
+=============
+=============
+=============
+  TODO: 单独抽抽离UI样式，统一处理hover 列表内容。
+*/
+
+.floatLayerTipUiTrigger {
+  &:hover {
+    .floatLayerTipUiContainer {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translate(-50%, -115%);
+    }
+  }
+}
+
+.floatLayerTipUiContainer {
+  transition: 0.3s all;
+  pointer-events: none;
+  opacity: 0;
+  @include positionAlignCenter(0, 50%, -50%, -85%);
+  z-index: 9;
+
+  padding: 0;
+  margin: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 3px;
+  text-align: center;
+
+  & > li {
+    cursor: pointer;
+    padding: 2px 5px;
+  }
+
+  li:hover {
+    color: red;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+
+    width: 100%;
+    height: 15px;
+  }
+}
+
+/*
+=============
+=============
+=============
+*/

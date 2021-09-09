@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2021-08-30 15:57:13
+ * @LastEditTime: 2021-09-08 15:32:41
  * @FilePath: /plugin-core/packages/vpplayer/src/core/index.ts
  */
 
@@ -11,10 +11,12 @@ import { createDOM, addClass, removeClass } from '@/util';
 import style from '@/skin/styles/index.scss';
 // import cn from 'classname';
 
+import { configInterface } from '@/interface';
+
 
 class Player extends Proxy {
   public root // 根节点
-  public config// 用户配置
+  public config: configInterface = null // 用户配置
   public isProgressMoving: boolean = false // 用户是否在拖动进度条
 
   public controls: any = null // 控制器
@@ -33,7 +35,7 @@ class Player extends Proxy {
   // 插件集合
   static plugins: any = {}
 
-  constructor(config?) {
+  constructor(config?: configInterface) {
     super()
     this.config = config
     const videoContainer = createDOM({
@@ -77,7 +79,7 @@ class Player extends Proxy {
 
   pluginsCall() {
     if (Player.plugins) {
-      let ignores = this.config.ignores
+      // let ignores = this.config.ignores
       Object.keys(Player.plugins).forEach(name => {
         let descriptor = Player.plugins[name]
         descriptor.call(this, this)
