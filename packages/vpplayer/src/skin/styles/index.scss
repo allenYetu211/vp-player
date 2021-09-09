@@ -1,8 +1,8 @@
 :global {
   controls {
     svg {
-      width: 32px;
-      height: 32px;
+      width: 26px;
+      height: 26px;
     }
   }
 }
@@ -31,6 +31,8 @@
   align-items: center;
 
   background-color: rgba(0, 0, 0, 1);
+
+  font-size: 14px;
 
   position: absolute;
   left: 0;
@@ -66,7 +68,7 @@
 
 .iconSwitch1,
 .tipSwitch1 {
-  display: block;
+  display: flex;
 }
 .iconSwitch2,
 .tipSwitch2 {

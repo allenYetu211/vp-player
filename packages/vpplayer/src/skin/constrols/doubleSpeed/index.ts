@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 09:26:17
  * @Descripttion:
- * @LastEditTime: 2021-09-09 17:47:47
+ * @LastEditTime: 2021-09-09 18:57:57
  * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/doubleSpeed/index.ts
  */
 /**
@@ -13,6 +13,7 @@ import Player from '@/core';
 import { createDOM, findDom, removeClass, addClass } from '@/util';
 import cn from 'classname';
 import style from './style.scss';
+import globalStyle from '@/skin/styles/global.scss';
 
 
 const skin_doubleSpeed = function (this: Player) {
@@ -30,7 +31,7 @@ const skin_doubleSpeed = function (this: Player) {
   })
 
 
-  const temp = [`<ul class="${cn(style.ulContainer, style.floatLayerTipUiContainer)}">`];
+  const temp = [`<ul class="${cn(style.ulContainer, globalStyle.floatLayerTipUiContainer)}">`];
   let currentPitchOn = '';
   list.forEach((item: { name: string, rate: string, selected: boolean }) => {
     if (rateConfig.defaultPlaybackRate.toString() === item.rate) {
@@ -49,7 +50,7 @@ const skin_doubleSpeed = function (this: Player) {
 
   const container = createDOM({
     el: 'v-playback',
-    cname: cn(style.container, style.floatLayerTipUiTrigger)
+    cname: cn(style.container, globalStyle.floatLayerTipUiTrigger)
   })
 
   container.innerHTML = temp.join('');

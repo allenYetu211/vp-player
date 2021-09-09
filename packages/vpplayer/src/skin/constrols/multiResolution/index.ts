@@ -1,16 +1,22 @@
+/**
+ * 清晰度
+ */
+
 /*
  * @Author: Allen OYang
  * @Date: 2021-08-23 15:53:31
- * @Descripttion:
- * @LastEditTime: 2021-08-30 16:30:20
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/multiResolution/index.ts
+ * @Descripttion: 
+ * @LastEditTime: 2021-09-09 19:06:26
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/multiResolution/index.ts
  */
+
 
 
 import Player from '@/core';
 import { createDOM, findDom } from '@/util';
-import style from '@/skin/styles/index.scss';
-import currentStyle from './index.scss';
+import basisStyle from '@/skin/styles/index.scss';
+import globalStyle from '@/skin/styles/global.scss';
+import style from './index.scss';
 import cn from 'classname';
 
 const multiResolutionConfig = [{
@@ -26,6 +32,7 @@ const multiResolutionConfig = [{
 
 const multiResolutionIndex = 1;
 
+
 const skin_multiResolution = function () {
   if (!this.config.multiResolution) {
     return
@@ -35,10 +42,10 @@ const skin_multiResolution = function () {
 
   const btnEl: Element = createDOM({
     el: 'vp-multiResolution',
-    tpl: `<div class="${currentStyle.multiResolutionContainer}">
-            <div class="${cn(currentStyle.multiResolution)}">${list[defaultInit].text}</div>
+    tpl: `<div class="${cn(style.multiResolutionContainer, globalStyle.floatLayerTipUiTrigger)}">
+            <div class="${cn(style.multiResolution)}">${list[defaultInit].text}</div>
          </div>`,
-    cname: style.operate
+    cname: basisStyle.operate
   })
 
   const switchList = (() => {
@@ -48,14 +55,14 @@ const skin_multiResolution = function () {
     });
     return createDOM({
       el: 'ul',
-      cname: `${currentStyle.switchUl}`,
+      cname: cn(style.ulContainer, globalStyle.floatLayerTipUiContainer),
       tpl: liEl
     })
   })();
 
 
-  const multiResolutionContainer = btnEl.querySelector(`.${currentStyle.multiResolutionContainer}`);
-  const multiResolutionText = btnEl.querySelector(`.${currentStyle.multiResolution}`);
+  const multiResolutionContainer = btnEl.querySelector(`.${style.multiResolutionContainer}`);
+  const multiResolutionText = btnEl.querySelector(`.${style.multiResolution}`);
   multiResolutionContainer.appendChild(switchList);
 
   this.once('ready', () => {
