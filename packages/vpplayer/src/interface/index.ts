@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 11:36:02
  * @Descripttion:
- * @LastEditTime: 2021-09-08 11:36:02
+ * @LastEditTime: 2021-09-10 14:17:15
  * @FilePath: /plugin-core/packages/vpplayer/src/interface/index.ts
  */
 
@@ -24,4 +24,12 @@ export interface configInterface {
     }[];
     defaultInit: number;
   };
+  thumbnail: {
+    pic_num: number;
+    width: number;
+    height: number;
+    col: number;
+    row: number;
+    url: string[];
+  }
 }

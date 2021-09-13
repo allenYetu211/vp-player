@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-08-30 15:54:25
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/progress/index.ts
+ * @LastEditTime: 2021-09-13 11:53:26
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/progress/index.ts
  */
 
 import Player from '@/core';
@@ -15,7 +15,10 @@ import cn from 'classname';
 
 
 
-const skin_progress = function () {
+// 距离两侧边距距离
+const BOUNDARY_DISTANCE = 20
+
+const skin_progress = function (this: Player) {
   const containerEl = createDOM({
     el: 'vp-progress',
     cname: style.progress,
@@ -24,10 +27,11 @@ const skin_progress = function () {
               <vp-cache class="${style.progressCache}"></vp-cache>
               <vp-played class="${style.progressPlayed}"></vp-played>
               <vp-progress-btn class="${style.progressBtn}"></vp-progress-btn>
-              <vp-point class="${cn(style.progressPoint)}">
-                <div class="${cn(style.progressPointContent, globalStyle.tips)}"></div>
-              </vp-point>
-              <vp-thumbnail class="${cn(style.progressThumbnail, style.tips)}"></vp-thumbnail>
+              <vp-point class="${cn(style.progressPoint)}"></vp-point>
+              <div class="${cn(style.progressPointContent, globalStyle.tips)}">00:00</div>
+              ${this.config.thumbnail ?
+        `<vp-thumbnail class="${cn(style.progressThumbnail, style.tips)}"></vp-thumbnail>` : ''
+      }
             </vp-outer>
           `
   });
@@ -40,7 +44,18 @@ const skin_progress = function () {
   const point: HTMLDivElement = containerEl.querySelector(`.${style.progressPoint}`);
   const pointContent: HTMLDivElement = containerEl.querySelector(`.${style.progressPointContent}`);
   const progressPlayed: HTMLDivElement = containerEl.querySelector(`.${style.progressPlayed}`);
-  const thumbnail: HTMLDivElement = containerEl.querySelector(`.${style.progressThumbnail}`);
+  const thumbnailEL: HTMLDivElement = containerEl.querySelector(`.${style.progressThumbnail}`);
+
+  const { thumbnail } = this.config;
+
+  if (thumbnail) {
+    thumbnailEL.style.width = `${thumbnail.width}px`;
+    thumbnailEL.style.height = `${thumbnail.height}px`;
+    thumbnailEL.style.backgroundPosition = `0px 0px;`;
+    thumbnailEL.style.backgroundImage = `url('${thumbnail.url}')`;
+  }
+
+
   /**
    * 监听播放进度
    */
@@ -87,6 +102,8 @@ const skin_progress = function () {
    */
   ['touchstart', 'mousedown'].forEach((item: string) => {
     containerEl.addEventListener(item, (e: MouseEvent) => {
+
+
       const { width } = containerEl.getBoundingClientRect();
       const left = e.clientX;
       const rate = `${(left / width) * 100}%`;
@@ -103,6 +120,7 @@ const skin_progress = function () {
         progressPlayed.style.width = moveTate;
         btn.style.left = moveTate;
       }
+
 
       const up = (event: MouseEvent) => {
         const { clientX } = event;
@@ -127,21 +145,84 @@ const skin_progress = function () {
    */
   // ['mouseenter'].forEach((item: string) => {
 
+
   containerEl.addEventListener('mouseenter', (e: MouseEvent) => {
     const { width } = containerEl.getBoundingClientRect();
+    const pointWidth = pointContent.getBoundingClientRect().width;
+
+
+    // 控制显示
+    pointContent.style.display = 'block';
+    if (thumbnail) {
+      thumbnailEL.style.display = 'block';
+    }
+
+    /**
+     * 计算滑动距离
+     * todo： 更具刷新评率计算
+     * @param event 
+     */
     const move = (event: MouseEvent) => {
       // 处理时间内容显示。
       const left = event.clientX;
-      point.style.left = `${left}px`;
       point.style.display = `block`;
       pointContent.textContent = `${format((left / width) * this.duration)}`;
-
+      point.style.left = `${left}px`;
       // 处理缩略图显示
+      if (thumbnail) {
+        handleThumbnailBackgroundStyle(left);
+        // 设置滑动边界
+        if (handleBoundary(left, thumbnail.width)) {
+          thumbnailEL.style.left = `${left}px`;
+          pointContent.style.left = `${left}px`;
+        }
+      } else {
+        if (handleBoundary(left, pointWidth)) {
+          pointContent.style.left = `${left}px`;
+        }
+      }
+    }
 
+    /**
+     * 处理缩略图显示
+     */
+    const handleThumbnailBackgroundStyle = (left) => {
+      // 当前显示的图片下标
+      const nowIndex = Math.floor((left / width) * thumbnail.pic_num);
+      // 计算定位行数
+      const col = Math.floor(nowIndex / thumbnail.col);
+      // 获取position Y轴位置
+      const positionY = col * thumbnail.height;
+      // 获取position X轴位置
+      const positionX = (nowIndex - ((col - 1 < 0 ? 0 : col - 1) * thumbnail.col)) * thumbnail.width;
+      thumbnailEL.style.backgroundPosition = `-${positionX}px  -${positionY}px`;
+
+
+    }
+
+
+    /**
+     * 边界判断
+     * @param left 距离左侧距离
+     * @param targetWidth  当前显示框宽度
+     * @returns boolean
+     */
+    const handleBoundary = (left, targetWidth): boolean => {
+      if (left - BOUNDARY_DISTANCE < targetWidth / 2) {
+        return false;
+      }
+      if (Math.abs(left - width) < (targetWidth / 2) + BOUNDARY_DISTANCE) {
+        return false;
+      }
+      return true;
     }
 
     const leave = () => {
       point.style.display = `none`;
+      pointContent.style.display = `none`;
+      if (thumbnail) {
+        thumbnailEL.style.display = `none`;
+      }
       containerEl.removeEventListener('mousemove', move, false);
       containerEl.removeEventListener('mouseleave', leave, false);
     }
