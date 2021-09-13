@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 09:26:17
  * @Descripttion:
- * @LastEditTime: 2021-09-09 18:57:57
+ * @LastEditTime: 2021-09-13 17:30:02
  * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/doubleSpeed/index.ts
  */
 /**
@@ -60,6 +60,7 @@ const skin_doubleSpeed = function (this: Player) {
    */
   const ulEl = container.querySelector(`.${style.ulContainer}`);
   ['touch', 'click'].forEach((item: string) => {
+    console.log('touch', item);
     ulEl.addEventListener(item, (event: PointerEvent) => {
       const li = (<HTMLLIElement>event.target)
       if (li && li.nodeName === 'LI') {

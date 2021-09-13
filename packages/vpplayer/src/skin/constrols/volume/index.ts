@@ -2,26 +2,17 @@
  * @Author: Allen OYang
  * @Date: 2021-08-02 10:25:22
  * @Descripttion:
- * @LastEditTime: 2021-09-06 19:32:06
+ * @LastEditTime: 2021-09-13 17:37:35
  * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/volume/index.ts
  */
 
 import Player from '@/core';
 import { createDOM, findDom } from '@/util';
-
-
 import cn from 'classname';
-
-// import VolumeSmall from '@/skin/assets/VolumeSmall.svg';
-// import volumeLarge from '@/skin/assets/volumeLarge.svg';
 import volumeLarge from '@/skin/assets/iconvolumeLarge.svg';
 import volumeMuted from '@/skin/assets/iconvolumeMuted.svg';
-
-// import c's't'y'le from '@/skin/controls/volume/index.scss';
 import cstyle from './index.scss';
 import style from '@/skin/styles/index.scss';
-
-
 
 // <div class="${cn(style.iconPlay, style.iconSwitch1)}">${VolumeSmall}</div>
 
@@ -30,7 +21,6 @@ const skip_volume = function (this: Player) {
   /**
    * UI 部分
    */
-
   const btnContainerEL: Element = createDOM({
     el: 'vp-volume',
     cname: cstyle.volume,
