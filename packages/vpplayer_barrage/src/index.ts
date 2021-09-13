@@ -1,8 +1,9 @@
+// 弹幕
 /*
  * @Author: Allen OYang
  * @Date: 2021-07-22 09:07:56
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 17:20:28
+ * @LastEditTime: 2021-09-13 17:23:42
  * @FilePath: /plugin-core/packages/vpplayer_barrage/src/index.ts
  */
 
@@ -43,7 +44,6 @@ const plugin_barrageCanvas = function (this: Player) {
 
   // 添加弹幕信息
   this.on('barrageCanvas_push', (value) => {
-    console.log('value', value[0]);
     bcClass.pushBarrage(value[0]);
   })
 

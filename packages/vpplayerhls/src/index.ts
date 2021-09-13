@@ -12,14 +12,14 @@ import Player from 'vpplayer';
 import Hls from 'hls.js';
 
 
-class playerHLS extends Player   {
-  constructor(options){
+class playerHLS extends Player {
+  constructor(options) {
     super(options);
   }
 
   start() {
     console.log('Hls.isSupported()', Hls.isSupported());
-    
+
     const url: string = this.config.url;
     this.root.insertBefore(this.video, this.root.firstChild);
 
@@ -27,7 +27,7 @@ class playerHLS extends Player   {
       var hls = new Hls();
       hls.loadSource(url);
       hls.attachMedia(this.video);
-    }else if (this.video.canPlayType('application/vnd.apple.mpegurl')) {
+    } else if (this.video.canPlayType('application/vnd.apple.mpegurl')) {
       this.video.src = url;
     }
 
@@ -47,6 +47,6 @@ class playerHLS extends Player   {
 export default playerHLS;
 
 // const app = () => {
-//   console.log('app<<<<<>2>>>><')
+//   ('app<<<<<>2>>>><')
 // }
 // export  default app;

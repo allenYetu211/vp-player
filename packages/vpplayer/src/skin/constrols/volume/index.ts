@@ -93,13 +93,6 @@ const skip_volume = function (this: Player) {
     vpVolumeBarEL.addEventListener(item, (e: MouseEvent) => {
       const { height } = vpVolumeBarEL.getBoundingClientRect();
       const volumeEnergy = (height - e.offsetY) / height;
-
-      console.log(e.target);
-      console.log('height', height);
-      console.log('e.offsetY', e.offsetY);
-
-      console.log('volumeEnergy', volumeEnergy);
-
       this.volume = volumeEnergy;
       handleDragUI(`${volumeEnergy * 100}%`);
     }, false);
@@ -166,18 +159,6 @@ const skip_volume = function (this: Player) {
     volumeLargeEL.style.display = largeStyle;
     volumeMutedEL.style.display = mutedStyle;
   }
-
-
-
-
-
-
-
-  // btnContainerEL.addEventListener('click', (event: Event) => {
-  //   console.log('event', event)
-  //   console.log('e.target >>>> ', (<HTMLLIElement>event.target).nodeName);
-  // });
-
 }
 
 Player.install('skip_volume', skip_volume);
