@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "lerna run dev",
     "node-start": "node app.js",
-    "start": "concurrently \"yarn run dev\" \"yarn run node-start\""
+    "start": "concurrently \"yarn run dev\" \"yarn run node-start\"",
+    "bootstrap": "lerna bootstrap"
   },
   "workspaces": [
     "packages/*"

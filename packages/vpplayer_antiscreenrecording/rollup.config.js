@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-07-28 19:23:13
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 14:59:36
- * @FilePath: /plugin-core/packages/vpplayer/rollup.config.js
+ * @LastEditTime: 2021-09-13 15:17:04
+ * @FilePath: /plugin-core/packages/vpplayer_antiscreenrecording/rollup.config.js
  */
 /*
  * @Author: Allen OYang
@@ -15,34 +15,22 @@
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import clear from 'rollup-plugin-clear';
-// import json from 'rollup-plugin-json';
-// import serve from 'rollup-plugin-serve';
 import resolve from 'rollup-plugin-node-resolve';
 import svg from 'rollup-plugin-svg'
-// import scss from 'rollup-plugin-scss'
-
 import styles from "rollup-plugin-styles";
-import alias from '@rollup/plugin-alias';
 
+import tsconfig from './tsconfig.json';
 
-
-
-
-// import scss from 'rollup-plugin-scss'
-
-// import { terser } from "rollup-plugin-terser";
-// import {uglify} from 'rollup-plugin-uglify';
 
 import path from 'path';
 
-import tsconfig from './tsconfig.json';
 
 const resolveFile = function (filePath) {
   return path.join(__dirname, filePath)
 }
 
 const outputConfig = {
-  name: 'Player',
+  name: 'PlayerPluginAntiScreenre',
   outputFile: './lib',
   format: ['iife', 'cjs', 'umd', 'esm']
 }
@@ -65,8 +53,7 @@ export default {
       modules: {
         mode: "local",
         generateScopedName: "vp_[local]_[hash:4]",
-      },
-
+      }
     }),
     typescript({
       exclude: 'node_modules/**',
@@ -74,20 +61,15 @@ export default {
       objectHashIgnoreUnknownHack: false,
     }),
     svg(),
-    resolve(),
-
     commonjs(),
     clear('./lib'),
-    alias({
-      entries: [
-        { find: '@', replacement: './src' },
-      ]
-    }),
-    //  开发配置
-    // serve({
-    //   port: 3000,
-    //   contentBase: [resolveFile('examples'), resolveFile('lib')]
-    // }),
+    resolve({
+      // 将自定义选项传递给解析插件
+      customResolveOptions: {
+        moduleDirectory: 'node_modules'
+      }
+    })
   ],
+  external: ['vpplayer']
 
 };

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 11:53:26
+ * @LastEditTime: 2021-09-13 14:05:03
  * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/progress/index.ts
  */
 
@@ -196,8 +196,6 @@ const skin_progress = function (this: Player) {
       // 获取position X轴位置
       const positionX = (nowIndex - ((col - 1 < 0 ? 0 : col - 1) * thumbnail.col)) * thumbnail.width;
       thumbnailEL.style.backgroundPosition = `-${positionX}px  -${positionY}px`;
-
-
     }
 
 
