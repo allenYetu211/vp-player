@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 16:02:42
+ * @LastEditTime: 2021-09-13 17:19:05
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -46,14 +46,39 @@ const config = {
 
 const player = new Player(config);
 
-player.emit('antiScreenRecording_start', {
-  fontSize: 36,
-  text: '测试',
-  color: '#fff',
-  duration: 3000,
-  interval: 2000,
-})
+// player.emit('antiScreenRecording_start', {
+//   fontSize: 36,
+//   text: '测试',
+//   color: '#fff',
+//   duration: 3000,
+//   interval: 2000,
+// })
 
+
+// player.on('ready', () => {
+let count = 0;
+const interval = setInterval(() => {
+  count += 1;
+  if (count > 100) {
+    clearInterval(interval);
+    return
+  }
+  player.emit('barrageCanvas_push', {
+    value: `${count}：`,
+    speed: 2
+  })
+}, 100);
+
+setTimeout(() => {
+  player.emit('barrageCanvas_clean')
+}, 2000)
+
+setTimeout(() => {
+  player.emit('barrageCanvas_open')
+}, 4000)
+
+// player.emit('barrageCanvas_start')
+// })
 
 
 // const player = new PlayerHLS({
