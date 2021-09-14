@@ -2,14 +2,14 @@
  * @Author: Allen OYang
  * @Date: 2021-07-31 15:41:01
  * @Descripttion:
- * @LastEditTime: 2021-08-30 15:55:18
- * @FilePath: /plugin-core/packages/vpplayer/src/skin/controls/playTime/index.ts
+ * @LastEditTime: 2021-09-13 17:58:51
+ * @FilePath: /plugin-core/packages/vpplayer/src/skin/constrols/playTime/index.ts
  */
 
 import Player from '@/core';
 import { createDOM, findDom, format } from '@/util';
 
-const skin_playTime = function () {
+const skin_playTime = function (this: Player) {
   const playTimeEl = createDOM({
     el: 'vp-play-time',
     tpl: `00:00 / 00:00`
