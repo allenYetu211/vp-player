@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 17:29:17
+ * @LastEditTime: 2021-09-15 10:35:10
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -44,7 +44,7 @@ const config = {
 
 }
 
-const player = new Player(config);
+const player = new XYPlayer(config);
 
 // player.emit('antiScreenRecording_start', {
 //   fontSize: 36,

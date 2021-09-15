@@ -1,0 +1,39 @@
+{
+  "name": "xyplayer_antiscreenrecording",
+  "version": "0.0.2",
+  "main": "lib/index.umd.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "scripts-webpack": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-syntax-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.14.8",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "file-loader": "^6.2.0",
+    "lerna": "^4.0.0",
+    "livereload": "^0.9.1",
+    "ts-loader": "^9.2.4",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@types/event-emitter": "^0.3.3",
+    "event-emitter": "^0.3.5",
+    "eventemitter3": "^4.0.7"
+  }
+}
