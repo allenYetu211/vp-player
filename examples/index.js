@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2021-09-15 10:35:10
+ * @LastEditTime: 2021-09-16 17:29:25
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -10,14 +10,14 @@
 const pl = document.querySelector('#video');
 
 const config = {
-  // thumbnail: {
-  //   pic_num: 17,
-  //   width: 160,
-  //   height: 90,
-  //   col: 24,
-  //   row: 10,
-  //   url: "https://testdevcdn.xylink.com/test-video/test-img.png"
-  // },
+  thumbnail: {
+    pic_num: 17,
+    width: 160,
+    height: 90,
+    col: 24,
+    row: 10,
+    url: "https://testdevcdn.xylink.com/test-video/test-img.png"
+  },
   el: pl,
   type: 'mp4',
   url: 'https://testdevcdn.xylink.com/test-video/xg360.mp4',
