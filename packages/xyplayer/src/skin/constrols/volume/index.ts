@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-02 10:25:22
  * @Descripttion:
- * @LastEditTime: 2021-09-13 17:37:35
+ * @LastEditTime: 2021-09-16 17:22:30
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/volume/index.ts
  */
 
@@ -13,6 +13,9 @@ import volumeLarge from '@/skin/assets/iconvolumeLarge.svg';
 import volumeMuted from '@/skin/assets/iconvolumeMuted.svg';
 import cstyle from './index.scss';
 import style from '@/skin/styles/index.scss';
+import deviceInfo from '@/util/deviceInfo';
+
+const isPC = deviceInfo.pc;
 
 // <div class="${cn(style.iconPlay, style.iconSwitch1)}">${VolumeSmall}</div>
 
@@ -40,7 +43,9 @@ const skip_volume = function (this: Player) {
     `
   });
 
-  btnContainerEL.appendChild(volumeEL);
+  if (isPC) {
+    btnContainerEL.appendChild(volumeEL);
+  }
 
   this.once('ready', () => {
     const vpFullscreenEL = findDom(this.controls, 'vp-fullscreen');
@@ -75,6 +80,12 @@ const skip_volume = function (this: Player) {
   volumeMutedEL.addEventListener('click', () => {
     this.volume = 0.6;
   }, false);
+
+  // if (deviceInfo.pc) {
+  //   return 
+  // }
+
+
 
   /**
    * 音量点击事件绑定
@@ -133,10 +144,10 @@ const skip_volume = function (this: Player) {
     handleDragUI(`${this.volume * 100}%`);
 
     if (videoVolume <= 0) {
-      handleVolumeUIstyle('none', 'block');
+      handleVolumeUIstyle('none', 'flex');
       return
     }
-    handleVolumeUIstyle('block', 'none');
+    handleVolumeUIstyle('flex', 'none');
   })
 
 

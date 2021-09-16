@@ -22,6 +22,7 @@
   right: 0;
   background-color: #000;
   color: #fff;
+  overflow: hidden;
 }
 
 .controls {
@@ -29,15 +30,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 1);
-
   font-size: 14px;
-
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .controlsLeft,
@@ -77,7 +77,7 @@
 
 .tips {
   position: absolute;
-  top: 0;
+  top: -20px;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;

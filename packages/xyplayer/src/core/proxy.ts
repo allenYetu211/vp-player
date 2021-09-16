@@ -13,7 +13,7 @@ import { createDOM } from '../util'
 
 export default class Proxy {
   private _emitter: EventEmitter = new EventEmitter();
-  public video // 播放器video
+  public video; // 播放器video
 
   constructor() {
     this.video = createDOM({

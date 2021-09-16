@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-30 16:21:40
  * @Descripttion:
- * @LastEditTime: 2021-09-06 14:21:27
+ * @LastEditTime: 2021-09-16 17:52:28
  * @FilePath: /plugin-core/packages/xyplayer/src/controls/keyboardControl/index.ts
  */
 
@@ -95,7 +95,7 @@ const keyboardControl = function (this: Player) {
   })
 
   this.root.addEventListener('mouseenter', () => {
-    console.log('mouseEnter');
+    // console.log('mouseEnter');
   })
 
   this.root.addEventListener('focus', () => {

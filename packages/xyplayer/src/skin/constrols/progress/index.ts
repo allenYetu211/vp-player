@@ -2,41 +2,52 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 14:05:03
+ * @LastEditTime: 2021-09-16 18:57:01
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/progress/index.ts
  */
 
 import Player from '@/core';
-import { createDOM } from '@/util';
+import { createDOM, findDom } from '@/util';
 import { format } from '@/util';
 import style from './index.scss';
 import globalStyle from '@/skin/styles/global.scss';
+import deviceInfo from '@/util/deviceInfo';
 import cn from 'classname';
 
+const isPc = deviceInfo.pc;
 
-
+const paddingSkip = 10;
 // 距离两侧边距距离
-const BOUNDARY_DISTANCE = 20
+const BOUNDARY_DISTANCE = 0;
 
 const skin_progress = function (this: Player) {
   const containerEl = createDOM({
     el: 'vp-progress',
+    // cname: cn(style.progress, { [style.progressOuterMobile]: !isPc }),
     cname: style.progress,
     tpl: `
-            <vp-outer class="${style.progressOuter}">
+            <vp-outer class="${cn(style.progressOuter)}">
               <vp-cache class="${style.progressCache}"></vp-cache>
               <vp-played class="${style.progressPlayed}"></vp-played>
               <vp-progress-btn class="${style.progressBtn}"></vp-progress-btn>
               <vp-point class="${cn(style.progressPoint)}"></vp-point>
-              <div class="${cn(style.progressPointContent, globalStyle.tips)}">00:00</div>
-              ${this.config.thumbnail ?
+              ${isPc ? ` <div class="${cn(style.progressPointContent, globalStyle.tips)}">00:00</div>` : ""}
+              ${isPc && this.config.thumbnail ?
         `<vp-thumbnail class="${cn(style.progressThumbnail, style.tips)}"></vp-thumbnail>` : ''
       }
             </vp-outer>
           `
   });
 
-  this.controls.appendChild(containerEl);
+  this.on('ready', () => {
+    if (isPc) {
+      this.controls.appendChild(containerEl);
+    } else {
+      const controlsRight = findDom(this.controls, 'vp-controls-right');
+      this.controls.insertBefore(containerEl, controlsRight);
+    }
+  })
+
 
   const btn: HTMLDivElement = containerEl.querySelector(`.${style.progressBtn}`);
   // const outer: HTMLDivElement = containerEl.querySelector(`.${style.progressOuter}`);
@@ -102,31 +113,32 @@ const skin_progress = function (this: Player) {
    */
   ['touchstart', 'mousedown'].forEach((item: string) => {
     containerEl.addEventListener(item, (e: MouseEvent) => {
-
-
+      e.stopPropagation()
       const { width } = containerEl.getBoundingClientRect();
-      const left = e.clientX;
+      const left = e.clientX - paddingSkip;
       const rate = `${(left / width) * 100}%`;
       progressPlayed.style.width = rate;
       btn.style.left = rate;
-      this.video.currentTime = ((left / width) * this.duration).toFixed(1);
+      if (left && width) {
+        this.video.currentTime = ((left / width) * this.duration).toFixed(1);;
+      }
 
-      const move = (event: MouseEvent) => {
-        e.stopPropagation();
+      const move = (event) => {
+        event.stopPropagation();
         this.isProgressMoving = true;
-        const { clientX } = event;
-        const moveTate = `${(clientX / width) * 100}%`;
-
+        const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
+        const moveTate = `${((clientX - 20) / width) * 100}%`;
         progressPlayed.style.width = moveTate;
         btn.style.left = moveTate;
       }
 
 
-      const up = (event: MouseEvent) => {
-        const { clientX } = event;
-        this.video.currentTime = ((clientX / width) * this.duration).toFixed(1);
+      const up = (event) => {
+        event.stopPropagation();
+        const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
+        this.video.currentTime = (((clientX - paddingSkip) / width) * this.duration).toFixed(1);
         this.isProgressMoving = false;
-
+        console.log('removeEventListener')
         window.removeEventListener('mousemove', move)
         window.removeEventListener('touchmove', move)
         window.removeEventListener('mouseup', up)
@@ -147,10 +159,11 @@ const skin_progress = function (this: Player) {
 
 
   containerEl.addEventListener('mouseenter', (e: MouseEvent) => {
+    if (!deviceInfo.pc) { return }
+
     const { width } = containerEl.getBoundingClientRect();
+
     const pointWidth = pointContent.getBoundingClientRect().width;
-
-
     // 控制显示
     pointContent.style.display = 'block';
     if (thumbnail) {
@@ -164,7 +177,8 @@ const skin_progress = function (this: Player) {
      */
     const move = (event: MouseEvent) => {
       // 处理时间内容显示。
-      const left = event.clientX;
+      // -10是因为左右两侧 有10px padding 。
+      const left = event.clientX - paddingSkip;
       point.style.display = `block`;
       pointContent.textContent = `${format((left / width) * this.duration)}`;
       point.style.left = `${left}px`;
