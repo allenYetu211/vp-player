@@ -9,7 +9,7 @@
     "dev": "lerna run dev",
     "build": "lerna run build",
     "node-start": "node app.js",
-    "start": "concurrently \"yarn run dev\" \"yarn run node-start\"",
+    "start": "concurrently  \"yarn run node-start\" \"yarn run dev\"",
     "bootstrap": "lerna bootstrap"
   },
   "workspaces": [

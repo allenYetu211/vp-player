@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2021-09-13 14:30:57
+ * @LastEditTime: 2021-09-23 17:17:39
  * @FilePath: /plugin-core/packages/xyplayer/src/core/index.ts
  */
 
@@ -13,6 +13,7 @@ import style from '@/skin/styles/index.scss';
 // import cn from 'classname';
 
 import { configInterface } from '@/interface';
+import deviceInfo from '@/util/deviceInfo';
 
 
 class Player extends Proxy {
@@ -104,6 +105,7 @@ class Player extends Proxy {
     }
   }
 
+
   start() {
     const url: string = this.config.url;
     if (!url || url === '') {
@@ -146,6 +148,8 @@ class Player extends Proxy {
   }
 
   static util = util;
+
+  static device = deviceInfo;
 }
 
 // Player.util = {

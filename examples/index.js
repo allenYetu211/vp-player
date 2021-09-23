@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2021-09-16 17:29:25
+ * @LastEditTime: 2021-09-23 11:54:36
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -44,7 +44,7 @@ const config = {
 
 }
 
-const player = new XYPlayer(config);
+// const player = new XYPlayer(config);
 
 // player.emit('antiScreenRecording_start', {
 //   fontSize: 36,
@@ -82,10 +82,10 @@ const player = new XYPlayer(config);
 // })
 
 
-// const player = new PlayerHLS({
-//   el: pl,
-//   type: 'mp4',
-//   url: 'http://cd-live-stream.news.cctvplus.com/live/smil:CHANNEL1.smil/chunklist_w744036192_b1000000.m3u8',
-//   autoplay: false
-// });
+const player = new XYPlayerHLS({
+  el: pl,
+  type: 'mp4',
+  url: 'http://cd-live-stream.news.cctvplus.com/live/smil:CHANNEL1.smil/chunklist_w744036192_b1000000.m3u8',
+  autoplay: false
+});
 

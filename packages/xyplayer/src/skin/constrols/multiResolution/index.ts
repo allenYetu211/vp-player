@@ -33,7 +33,7 @@ const multiResolutionConfig = [{
 const multiResolutionIndex = 1;
 
 
-const skin_multiResolution = function () {
+const skin_multiResolution = function (this: Player) {
   if (!this.config.multiResolution) {
     return
   }
@@ -92,7 +92,7 @@ const skin_multiResolution = function () {
       /**
        * TODO: 切换视频过程，需要把进度条复原、时间戳复原
        */
-      this.video.src = src;
+      this.videoURL = src;
       this.videoStateOrder.canPlayFunc();
 
       this.emit('reSetStyle');

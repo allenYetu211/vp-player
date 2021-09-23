@@ -32,4 +32,6 @@ export interface configInterface {
     row: number;
     url: string[];
   }
+  isLive: boolean;
+  isVod: boolean;
 }

@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-07-28 19:23:13
  * @Descripttion: 
- * @LastEditTime: 2021-07-29 14:06:54
- * @FilePath: /plugin-core/packages/xyplayerhls/rollup.config.js
+ * @LastEditTime: 2021-09-23 10:38:33
+ * @FilePath: /plugin-core/packages/xyplayer_hls/rollup.config.js
  */
 /*
  * @Author: Allen OYang
@@ -29,7 +29,7 @@ const resolveFile = function (filePath) {
 }
 
 const outputConfig = {
-  name: 'PlayerHLS',
+  name: 'XYPlayerHLS',
   outputFile: './lib',
   format: ['iife', 'cjs', 'umd', 'esm']
 }

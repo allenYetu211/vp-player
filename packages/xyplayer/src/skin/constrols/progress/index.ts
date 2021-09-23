@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-09-16 18:57:01
+ * @LastEditTime: 2021-09-23 17:42:37
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/progress/index.ts
  */
 
@@ -21,9 +21,13 @@ const paddingSkip = 10;
 const BOUNDARY_DISTANCE = 0;
 
 const skin_progress = function (this: Player) {
+
+  if (this.config.isLive) {
+    return
+  }
+
   const containerEl = createDOM({
     el: 'vp-progress',
-    // cname: cn(style.progress, { [style.progressOuterMobile]: !isPc }),
     cname: style.progress,
     tpl: `
             <vp-outer class="${cn(style.progressOuter)}">

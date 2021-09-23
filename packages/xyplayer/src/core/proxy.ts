@@ -94,6 +94,10 @@ export default class Proxy {
     this.video.volume = vol
   }
 
+  set videoURL(url) {
+    this.video.src = url;
+  }
+
 
 
   // 发布订阅
