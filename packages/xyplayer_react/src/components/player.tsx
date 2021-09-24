@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:39:25
  * @Descripttion:
- * @LastEditTime: 2021-09-23 17:44:08
+ * @LastEditTime: 2021-09-24 11:38:54
  * @FilePath: /plugin-core/packages/xyplayer_react/src/components/player.tsx
  */
 import * as React from 'react';
@@ -11,7 +11,7 @@ import XYPlayerHLS from 'xyplayerhls';
 import { config, hls_config } from '../config/player-config';
 import { transformInjectParam } from '../utils/transform';
 
-const PlayerComponents = () => {
+const PlayerComponents = (): JSX.Element => {
 
   /**
    *  mp4 播放入参
@@ -39,10 +39,10 @@ const PlayerComponents = () => {
   const videoContentEl = React.useRef(null);
 
   return (
-    <div>
+    <>
       <div ref={videoContentEl} />
       PlayerComponents
-    </div>
+    </>
   )
 }
 

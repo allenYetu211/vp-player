@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-31 15:41:01
  * @Descripttion:
- * @LastEditTime: 2021-09-13 17:58:51
+ * @LastEditTime: 2021-09-24 11:48:46
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/playTime/index.ts
  */
 
@@ -12,7 +12,7 @@ import { createDOM, findDom, format } from '@/util';
 const skin_playTime = function (this: Player) {
   const playTimeEl = createDOM({
     el: 'vp-play-time',
-    tpl: `00:00 / 00:00`
+    tpl: `00:00`
   });
 
   this.on('ready', () => {
@@ -20,9 +20,11 @@ const skin_playTime = function (this: Player) {
     controlsLeft.appendChild(playTimeEl);
   });
 
+
   const onTimeupdate = () => {
-    playTimeEl.textContent = `${format(this.video.currentTime)} / ${format(this.duration)}`
+    playTimeEl.textContent = this.config.isLive ? `${format(this.video.currentTime)}` : `${format(this.video.currentTime)} / ${format(this.duration)}`;
   }
+
   this.on('timeupdate', onTimeupdate);
 
   this.on('reSetStyle', () => {

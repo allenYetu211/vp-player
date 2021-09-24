@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:52:09
  * @Descripttion:
- * @LastEditTime: 2021-09-23 12:03:06
+ * @LastEditTime: 2021-09-24 11:45:14
  * @FilePath: /plugin-core/packages/xyplayer_react/src/config/player-config.ts
  */
 
@@ -51,10 +51,10 @@ export const hls_config = {
         text: "CCTV ",
       },
       {
-        src: "http://prdpulllive.xylink.com/prdnemo/9680cfb67be4da5d017c10c3d7f73da0_2.m3u8?auth_key=777213bd4adb19135a44c10f5caebd2f-1632463220-963f7ab995ff423bbb0de669a18ec859-",
-        text: "小鱼2",
+        src: "http://cd-live-stream.news.cctvplus.com/live/smil:CHANNEL2.smil/chunklist_w1018196661_b1000000.m3u8",
+        text: "测试二",
       }
     ],
-    playIndex: 0,
+    playIndex: 1,
   }
 }
