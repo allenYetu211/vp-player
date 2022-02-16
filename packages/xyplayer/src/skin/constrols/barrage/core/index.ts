@@ -2,17 +2,10 @@
  * @Author: Allen OYang
  * @Date: 2021-09-13 15:31:30
  * @Descripttion:
- * @LastEditTime: 2022-01-04 14:59:00
- * @FilePath: /plugin-core/packages/xyplayer_barrage/src/core/index.ts
+ * @LastEditTime: 2022-01-04 19:56:43
+ * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/barrage/core/index.ts
  */
 
-/*
- * @Author: Allen OYang
- * @Date: 2021-08-18 10:26:18
- * @Descripttion:
- * @LastEditTime: 2021-08-26 14:30:16
- * @FilePath: /ts-vp/src/component/video-AntiScreenRecording/core/index.ts
- */
 
 
 

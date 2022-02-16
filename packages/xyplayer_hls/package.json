@@ -1,5 +1,5 @@
 {
-  "name": "xyplayerhls",
+  "name": "xyplayer_hls",
   "version": "0.0.2",
   "main": "lib/index.umd.js",
   "types": "lib/index.d.ts",
@@ -11,6 +11,9 @@
   "scripts-webpack": {
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production"
+  },
+  "peerDependencies": {
+    "xyplayer": "^0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

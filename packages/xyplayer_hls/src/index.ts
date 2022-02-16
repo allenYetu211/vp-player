@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-22 09:07:56
  * @Descripttion: 
- * @LastEditTime: 2021-09-23 17:38:11
+ * @LastEditTime: 2022-01-17 16:27:27
  * @FilePath: /plugin-core/packages/xyplayer_hls/src/index.ts
  */
 
@@ -20,7 +20,11 @@ class playerHLS extends XYPlayer {
   private timestampUnit: boolean | string = 't';
 
   constructor(options) {
+
     super(options);
+
+    console.log('options>>>>>>>>', options);
+    
     this.timestampUnit = this.config.timestampUnit;
   }
 
@@ -58,6 +62,7 @@ class playerHLS extends XYPlayer {
       this.hls = new Hls(hlsConfig);
 
       this.hls.loadSource(this.url);
+      // this.hls.loadSource('http://precdn-vod.xylink.com/vodfiles/sharefiles/pre/9680e35c7de64ad0017debd7b24d007b/s/live/9680e3627e00e291017e04cffdf3004c/202112/29142513/ad3fe0fc-031c-448a-be4f-dd45d3d77b05.m3u8');
       this.hls.attachMedia(this.video);
       // this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
       //   this.autoplay && this.play();

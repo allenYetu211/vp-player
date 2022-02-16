@@ -2,15 +2,14 @@
  * @Author: Allen OYang
  * @Date: 2020-09-30 10:21:49
  * @Descripttion: 
- * @LastEditTime: 2022-02-16 11:03:44
- * @FilePath: /plugin-core/packages/vp-player/rollup.config.js
+ * @LastEditTime: 2021-06-30 10:36:05
+ * @FilePath: /plugin-template/rollup.config.js
  */
-
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import clear from 'rollup-plugin-clear';
 import resolve from 'rollup-plugin-node-resolve';
-import svg from 'rollup-plugin-svg';
+import svg from 'rollup-plugin-svg'
 import styles from "rollup-plugin-styles";
 import tsconfig from './tsconfig.json';
 
@@ -23,7 +22,7 @@ const resolveFile = function (filePath) {
 }
 
 const outputConfig = {
-  name: 'XYPlayerHLS',
+  name: 'XYPlayerFLV',
   outputFile: './lib',
   format: ['iife', 'cjs', 'umd', 'esm']
 }

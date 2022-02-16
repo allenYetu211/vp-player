@@ -34,4 +34,6 @@ export interface configInterface {
   }
   isLive: boolean;
   isVod: boolean;
+  // allowPlayAfterEnded?: boolean;
+  // ended?: boolean;
 }

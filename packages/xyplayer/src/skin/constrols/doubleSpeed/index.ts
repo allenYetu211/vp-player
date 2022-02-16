@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 09:26:17
  * @Descripttion:
- * @LastEditTime: 2021-09-16 15:42:58
+ * @LastEditTime: 2022-02-16 14:31:38
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/doubleSpeed/index.ts
  */
 /**
@@ -19,6 +19,8 @@ import globalStyle from '@/skin/styles/global.scss';
 const skin_doubleSpeed = function (this: Player) {
   const { playbackRate } = this.config;
 
+  console.log('playbackRate', playbackRate);
+
   if (!playbackRate) { return };
 
   const rateConfig = {
@@ -33,7 +35,14 @@ const skin_doubleSpeed = function (this: Player) {
 
   const temp = [`<ul class="${cn(style.ulContainer, globalStyle.floatLayerTipUiContainer)}">`];
   let currentPitchOn = '';
+
   list.forEach((item: { name: string, rate: string, selected: boolean }) => {
+
+
+    console.log('rateConfig.defaultPlaybackRate.toString() ', rateConfig.defaultPlaybackRate.toString() );
+
+    console.log('item.rate', item.rate);
+    
     if (rateConfig.defaultPlaybackRate.toString() === item.rate) {
       item.selected = true;
       currentPitchOn = item.name;

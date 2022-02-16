@@ -1,14 +1,26 @@
-const webpack = require('webpack');
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-09-22 19:08:08
+ * @Descripttion: 
+ * @LastEditTime: 2022-01-12 15:38:38
+ * @FilePath: /plugin-core/packages/xyplayer_react/webpack.config.js
+ */
+// const webpack = require('webpack');
 const path = require('path');
+
+console.log('process.env.NODE_E === production', process.env.NODE_E === 'production')
 
 const config = {
   entry: [
     'react-hot-loader/patch',
-    './src/index.tsx'
+    process.env.NODE_E === 'production' ? './src/index.tsx' : './example/index.tsx'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'index.js',
+    library: 'videoPlayer',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
   },
   module: {
     rules: [

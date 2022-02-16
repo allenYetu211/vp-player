@@ -2,14 +2,14 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 10:41:41
  * @Descripttion:
- * @LastEditTime: 2021-09-23 11:45:13
+ * @LastEditTime: 2022-02-16 14:47:42
  * @FilePath: /plugin-core/packages/xyplayer_react/src/utils/transform.ts
  */
 
 import { configInterface } from 'xyplayer/lib/interface/index';
 import { initConfig } from '../interface';
 
-export const transformInjectParam = (config?: initConfig): configInterface => {
+export const transformInjectParam = (config: Partial<initConfig>): configInterface => {
 
   console.log('config', config);
 
@@ -31,11 +31,13 @@ export const transformInjectParam = (config?: initConfig): configInterface => {
   /**
    * 分辨率
    */
-  if (config!.multiple) {
+
+  if (config.multiple) {
+    const { initIndex, list } = config.multiple;
     newObj['playbackRate'] = {
-      rate: config!.multiple.list.map((item) => item.value),
+      rate: list.map((item) => item.value),
       placeholder: 'X',
-      defaultPlaybackRate: config!.multiple.initIndex,
+      defaultPlaybackRate: list[initIndex].value
     }
   }
 
@@ -52,6 +54,10 @@ export const transformInjectParam = (config?: initConfig): configInterface => {
       row: 0,
       url: [config!.thumbnail.picture]
     }
+  }
+
+  if (config.src) {
+    newObj['url'] = config.src;
   }
 
   return newObj;

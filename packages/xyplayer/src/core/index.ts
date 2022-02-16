@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2021-09-23 17:17:39
+ * @LastEditTime: 2022-02-16 11:45:00
  * @FilePath: /plugin-core/packages/xyplayer/src/core/index.ts
  */
 
@@ -10,11 +10,8 @@ import Proxy from './proxy';
 import * as util from '@/util';
 import { createDOM, addClass, removeClass } from '@/util';
 import style from '@/skin/styles/index.scss';
-// import cn from 'classname';
-
 import { configInterface } from '@/interface';
 import deviceInfo from '@/util/deviceInfo';
-
 
 class Player extends Proxy {
   public root // 根节点
@@ -120,6 +117,7 @@ class Player extends Proxy {
 
   play() {
     this.onPlay()
+    console.log('play');
     return this.video.play()
   }
 

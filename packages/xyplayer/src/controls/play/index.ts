@@ -10,12 +10,12 @@
 
 import Player from '@/core';
 
-const play = function () {
+const play = function  (this: Player) {
 
   const onPlayBtnClick = () => {
-    if (!this.config.allowPlayAfterEnded && this.ended) {
-      return
-    }
+    // if (!this.config.allowPlayAfterEnded && this.ended) {
+    //   return
+    // }
     if (this.paused) {
       let playPromise = this.play()
       if (playPromise !== undefined && playPromise) {

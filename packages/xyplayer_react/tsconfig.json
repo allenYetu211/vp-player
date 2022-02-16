@@ -1,19 +1,43 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "es5",
     "allowJs": true,
-    "jsx": "react",
-    "allowSyntheticDefaultImports": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "downlevelIteration": true,
+    "target": "es5",
+    "module": "es2015",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "outDir": "lib",
     "declaration": true,
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "lib": [
+      "es2015.promise",
+      "es5",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "output"
+  ],
   "include": [
-    "./src/**/*"
+    "src/**/*",
+    "src/index.d.ts"
   ]
 }

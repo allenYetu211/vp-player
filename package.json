@@ -10,7 +10,8 @@
     "build": "lerna run build",
     "node-start": "node app.js",
     "start": "concurrently  \"yarn run node-start\" \"yarn run dev\"",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "addPackage" : "lerna add"
   },
   "workspaces": [
     "packages/*"
