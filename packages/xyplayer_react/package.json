@@ -1,6 +1,6 @@
 {
   "name": "xyplayer_react",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "./dist/index.js",
   "keywords": [],
@@ -15,7 +15,6 @@
     "build": " NODE_ENV=production rollup -c"
   },
   "devDependencies": {
-    "rollup-plugin-sourcemaps": "^0.6.3",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
@@ -38,6 +37,7 @@
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.13.0",
     "rollup": "^2.63.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.31.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
