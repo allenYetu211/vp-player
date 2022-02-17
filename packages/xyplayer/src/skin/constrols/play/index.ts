@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-08 17:16:07
  * @Descripttion: 
- * @LastEditTime: 2021-09-15 11:10:52
+ * @LastEditTime: 2022-02-17 15:00:19
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/play/index.ts
  */
 
@@ -17,10 +17,7 @@ import cn from 'classname';
 const skin_play = function () {
 
   // let playBtn = this.config.playBtn ? this.config.playBtn : {}
-
-  console.log('style.operate', style.operate);
-
-  let btn: Element = createDOM({
+  const btn: Element = createDOM({
     el: 'vp-play',
     tpl: `
       <div class="${cn(style.iconPlay, style.iconSwitch1)}">${PlayIcon}</div>
@@ -28,7 +25,15 @@ const skin_play = function () {
     cname: `${style.operate}`
   });
 
-  let tipsText: { [test: string]: string } = {}
+
+  const btnCenterEL: Element = createDOM({
+    el: 'vp-play-center',
+    tpl: `
+      <div class="${cn(style.iconPlay, style.iconSwitch1)}">${PlayIcon}</div>`,
+    cname: `${cn(style.operate, style.playCenter)}`
+  });
+
+  const tipsText: { [test: string]: string } = {}
   tipsText.play = '播放';
   tipsText.pause = '暂停';
 
@@ -44,6 +49,8 @@ const skin_play = function () {
   this.once('ready', () => {
     const controlsLeft = findDom(this.controls, 'vp-controls-left');
     controlsLeft.appendChild(btn);
+
+    this.root.appendChild(btnCenterEL)
   });
 
   ['click', 'touchend'].forEach(item => {
@@ -52,6 +59,13 @@ const skin_play = function () {
       e.stopPropagation();
       this.emit('playBtnClick');
     })
+
+    btnCenterEL.addEventListener(item, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.emit('playBtnClick');
+    })
+    
   })
 }
 

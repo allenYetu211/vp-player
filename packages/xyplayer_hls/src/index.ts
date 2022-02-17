@@ -20,11 +20,8 @@ class playerHLS extends XYPlayer {
   private timestampUnit: boolean | string = 't';
 
   constructor(options) {
-
     super(options);
-
     console.log('options>>>>>>>>', options);
-    
     this.timestampUnit = this.config.timestampUnit;
   }
 

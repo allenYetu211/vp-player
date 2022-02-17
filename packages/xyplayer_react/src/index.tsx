@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:39:25
  * @Descripttion:
- * @LastEditTime: 2022-02-16 11:28:24
+ * @LastEditTime: 2022-02-16 17:46:50
  * @FilePath: /plugin-core/packages/xyplayer_react/src/index.tsx
  */
 import * as React from 'react';
@@ -20,22 +20,22 @@ const PlayerComponents = (config: initConfig): JSX.Element => {
   const player = React.useRef<XYPlayerHLS>();
 
   React.useEffect(() => {
+    console.log('config init::')
     const newConfig: configInterface = Object.assign({}, transformInjectParam(config),
       {
         el: videoContentEl.current,
         isLive: isLive(config.type, config.vod), // 判断是否为直播
       }
     );
-    player.current = new XYPlayerHLS(newConfig);
 
     const types = {
       'flv': XYPlayerFlv,
       'm3u8': XYPlayerHLS,
       'hls': XYPlayerHLS,
     }
-    player.current = new types[config.type](newConfig)
-  }, []);
 
+    player.current = new types[config.type](newConfig);
+  }, []);
 
   const videoContentEl = React.useRef(null);
 

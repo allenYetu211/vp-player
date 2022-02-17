@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 10:41:41
  * @Descripttion:
- * @LastEditTime: 2022-02-16 14:47:42
+ * @LastEditTime: 2022-02-16 14:53:21
  * @FilePath: /plugin-core/packages/xyplayer_react/src/utils/transform.ts
  */
 
@@ -11,10 +11,7 @@ import { initConfig } from '../interface';
 
 export const transformInjectParam = (config: Partial<initConfig>): configInterface => {
 
-  console.log('config', config);
-
   const newObj: any = Object.assign({}, config);
-
 
   /**
    *  分辨率
@@ -31,7 +28,6 @@ export const transformInjectParam = (config: Partial<initConfig>): configInterfa
   /**
    * 分辨率
    */
-
   if (config.multiple) {
     const { initIndex, list } = config.multiple;
     newObj['playbackRate'] = {

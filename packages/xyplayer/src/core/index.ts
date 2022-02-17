@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2022-02-16 11:45:00
+ * @LastEditTime: 2022-02-16 17:36:00
  * @FilePath: /plugin-core/packages/xyplayer/src/core/index.ts
  */
 
@@ -41,6 +41,7 @@ class Player extends Proxy {
       el: 'vp-container',
       cname: style.container,
     })
+    console.log('appendChild >>>> ');
     this.config.el.appendChild(videoContainer);
     this.root = videoContainer;
     this.controls = createDOM({

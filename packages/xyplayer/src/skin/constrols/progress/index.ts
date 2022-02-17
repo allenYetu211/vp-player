@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2021-09-23 17:42:37
+ * @LastEditTime: 2022-02-17 14:48:07
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/progress/index.ts
  */
 
@@ -16,7 +16,7 @@ import cn from 'classname';
 
 const isPc = deviceInfo.pc;
 
-const paddingSkip = 10;
+const paddingSkip = 12 * 2;
 // 距离两侧边距距离
 const BOUNDARY_DISTANCE = 0;
 
@@ -63,7 +63,7 @@ const skin_progress = function (this: Player) {
 
   const { thumbnail } = this.config;
 
-  if (thumbnail) {
+  if (isPc && thumbnail) {
     thumbnailEL.style.width = `${thumbnail.width}px`;
     thumbnailEL.style.height = `${thumbnail.height}px`;
     thumbnailEL.style.backgroundPosition = `0px 0px;`;
@@ -76,7 +76,7 @@ const skin_progress = function (this: Player) {
    */
   const onTimeupdate = () => {
     UIHandlerProgressAndBtn();
-    UIHnadlerBuffer();
+    UIHandlerBuffer();
   }
   /**
    * 处理播放进度
@@ -91,7 +91,7 @@ const skin_progress = function (this: Player) {
   /**
    * 处理数据缓冲区UI
    */
-  const UIHnadlerBuffer = () => {
+  const UIHandlerBuffer = () => {
     if (this.buffered && this.buffered.length > 0) {
       let end = this.buffered.end(this.buffered.length - 1)
       for (let i = 0, len = this.buffered.length; i < len; i++) {
@@ -123,30 +123,41 @@ const skin_progress = function (this: Player) {
       const rate = `${(left / width) * 100}%`;
       progressPlayed.style.width = rate;
       btn.style.left = rate;
-      if (left && width) {
-        this.video.currentTime = ((left / width) * this.duration).toFixed(1);;
-      }
+
+      // if (left && width) {
+      //   this.video.currentTime = ((left / width) * this.duration);
+      // }
+
 
       const move = (event) => {
         event.stopPropagation();
         this.isProgressMoving = true;
         const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-        const moveTate = `${((clientX - 20) / width) * 100}%`;
+        const difference = clientX -  paddingSkip;
+        const ratio  = difference / width;
+        const moveTate = `${(ratio > 1 ? 100 : ratio) * 100}%`;
         progressPlayed.style.width = moveTate;
         btn.style.left = moveTate;
-      }
+        const moveTime = `${format((difference / width) * this.duration)}`
 
+        this.emit('progressMove', {
+          updateState: false,
+          moveTime
+        })
+      }
 
       const up = (event) => {
         event.stopPropagation();
         const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-        this.video.currentTime = (((clientX - paddingSkip) / width) * this.duration).toFixed(1);
+        this.video.currentTime = (clientX - paddingSkip) / width * this.duration;
         this.isProgressMoving = false;
-        console.log('removeEventListener')
         window.removeEventListener('mousemove', move)
         window.removeEventListener('touchmove', move)
         window.removeEventListener('mouseup', up)
         window.removeEventListener('touchend', up)
+        this.emit('progressMove', {
+          updateState: true
+        })
       }
 
       window.addEventListener('mousemove', move)
@@ -183,11 +194,13 @@ const skin_progress = function (this: Player) {
       // 处理时间内容显示。
       // -10是因为左右两侧 有10px padding 。
       const left = event.clientX - paddingSkip;
+      const moveTime = `${format((left / width) * this.duration)}`
+
       point.style.display = `block`;
-      pointContent.textContent = `${format((left / width) * this.duration)}`;
+      pointContent.textContent = moveTime;
       point.style.left = `${left}px`;
       // 处理缩略图显示
-      if (thumbnail) {
+      if (isPc && thumbnail) {
         handleThumbnailBackgroundStyle(left);
         // 设置滑动边界
         if (handleBoundary(left, thumbnail.width)) {

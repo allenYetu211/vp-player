@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2022-02-16 14:25:56
+ * @LastEditTime: 2022-02-16 16:02:20
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -44,7 +44,7 @@ const config = {
 
 }
 
-// const player = new XYPlayer(config);
+const player = new XYPlayer(config);
 
 // player.emit('antiScreenRecording_start', {
 //   fontSize: 36,
@@ -91,12 +91,13 @@ const config = {
 
 
 
-const player = new XYPlayerFLV({
-  el: pl,
-  type: 'flv',
-  url: 'http://prdpulllive.xylink.com/prdnemo/9680cfbe7e82b7ef017f0133d47a55cc.flv?auth_key=a2fc87e84bc6fd64d8240efe4dd6882d-1645086606-a1f657087e10420091454a5cf456cc61-',
-  autoplay: false
-});
+// const player = new XYPlayerFLV({
+//   el: pl,
+//   type: 'flv',
+//   url: 'http://prdpulllive.xylink.com/prdnemo/9680cfbe7e82b7ef017f0133d47a55cc.flv?auth_key=a2fc87e84bc6fd64d8240efe4dd6882d-1645086606-a1f657087e10420091454a5cf456cc61-',
+//   autoplay: false,
+//   isLive: true
+// });
 
 
 
