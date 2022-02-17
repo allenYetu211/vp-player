@@ -1,3 +1,5 @@
+@import '../../styles/variable.scss';
+
 .progressOuterMobile {
   &.progress {
     position: relative;
@@ -9,9 +11,16 @@
   left: 10px;
   right: 10px;
   top: -5px;
-  background: rgba(255, 255, 255, 0.5);
+  background: $progress-background;
   height: 5px;
   cursor: pointer;
+  &.mobile {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100px
+  }
 }
 
 .progressOuter {
@@ -24,7 +33,7 @@
   left: 0;
   top: 0;
   z-index: 1;
-  background: rgba(255, 255, 255, 1);
+  background: $progress-played;
   height: 100%;
 }
 
@@ -32,7 +41,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: #bec4ca;
+  background: $progress-cache;
   height: 100%;
 }
 
@@ -45,15 +54,15 @@
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  box-shadow: 2px 2px 15px $progress-btn-shadow;
+  background-color: $progress-btn;
 }
 
 .progressPoint {
   position: relative;
   height: 100%;
   width: 1px;
-  background: #fff;
+  background: $progress-point;
   display: none;
 }
 
@@ -65,10 +74,10 @@
 
 .progressThumbnail {
   display: none;
-  background: rgba(0, 0, 0, 0.54);
+  background: $progress-thumbnail-background;
   border-radius: 1px;
   position: absolute;
-  color: #fff;
+  color: $progress-thumbnail;
   padding: 2px 4px;
   text-align: center;
   width: auto;

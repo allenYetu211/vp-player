@@ -1,3 +1,5 @@
+@import './variable.scss';
+
 :global {
   controls {
     svg {
@@ -20,8 +22,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #000;
-  color: #fff;
+  background-color: $container-background;
+  color: $container-color;
   overflow: hidden;
 }
 
@@ -30,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: $controls-background;
   font-size: 14px;
   position: absolute;
   left: 0;

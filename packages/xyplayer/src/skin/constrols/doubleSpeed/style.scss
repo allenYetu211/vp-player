@@ -1,9 +1,12 @@
+@import '../../styles/variable.scss';
+
 .container {
   position: relative;
 }
 
 .selected {
-  color: red;
+  padding: 50px;
+  color: $basic-color;
 }
 
 .ulContainer {

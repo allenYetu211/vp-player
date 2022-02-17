@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 11:36:02
  * @Descripttion:
- * @LastEditTime: 2021-09-10 14:17:15
+ * @LastEditTime: 2022-02-17 16:31:45
  * @FilePath: /plugin-core/packages/xyplayer/src/interface/index.ts
  */
 
@@ -34,6 +34,7 @@ export interface configInterface {
   }
   isLive: boolean;
   isVod: boolean;
+  isMobile?: boolean
   // allowPlayAfterEnded?: boolean;
   // ended?: boolean;
 }

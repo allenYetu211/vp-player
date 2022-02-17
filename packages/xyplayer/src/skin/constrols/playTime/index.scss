@@ -1,0 +1,21 @@
+
+@mixin playTimeBasic {
+  min-width: 50px;
+  padding: 0 5px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.currentTime {
+  @include playTimeBasic;
+}
+
+.duration {
+  @include playTimeBasic;
+}
+
+.playTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-30 16:30:38
  * @Descripttion: 
- * @LastEditTime: 2022-02-17 14:48:07
+ * @LastEditTime: 2022-02-17 19:50:14
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/progress/index.ts
  */
 
@@ -22,13 +22,17 @@ const BOUNDARY_DISTANCE = 0;
 
 const skin_progress = function (this: Player) {
 
-  if (this.config.isLive) {
+  const {isMobile, isLive, thumbnail} = this.config;
+
+  if (isLive) {
     return
   }
 
   const containerEl = createDOM({
     el: 'vp-progress',
-    cname: style.progress,
+    cname: cn(style.progress, {
+      [style.mobile]: isMobile
+    }),
     tpl: `
             <vp-outer class="${cn(style.progressOuter)}">
               <vp-cache class="${style.progressCache}"></vp-cache>
@@ -36,7 +40,7 @@ const skin_progress = function (this: Player) {
               <vp-progress-btn class="${style.progressBtn}"></vp-progress-btn>
               <vp-point class="${cn(style.progressPoint)}"></vp-point>
               ${isPc ? ` <div class="${cn(style.progressPointContent, globalStyle.tips)}">00:00</div>` : ""}
-              ${isPc && this.config.thumbnail ?
+              ${isPc && thumbnail ?
         `<vp-thumbnail class="${cn(style.progressThumbnail, style.tips)}"></vp-thumbnail>` : ''
       }
             </vp-outer>
@@ -44,11 +48,14 @@ const skin_progress = function (this: Player) {
   });
 
   this.on('ready', () => {
-    if (isPc) {
-      this.controls.appendChild(containerEl);
+    if (isMobile) {
+      this.on('mobileInsertReady', () => {
+        const playTimeEL = findDom(this.controls, 'vp-play-time');
+        const durationEl = findDom(this.controls, 'vp-duration');
+        playTimeEL.insertBefore(containerEl, durationEl);
+      })
     } else {
-      const controlsRight = findDom(this.controls, 'vp-controls-right');
-      this.controls.insertBefore(containerEl, controlsRight);
+      this.controls.appendChild(containerEl);
     }
   })
 
@@ -61,15 +68,12 @@ const skin_progress = function (this: Player) {
   const progressPlayed: HTMLDivElement = containerEl.querySelector(`.${style.progressPlayed}`);
   const thumbnailEL: HTMLDivElement = containerEl.querySelector(`.${style.progressThumbnail}`);
 
-  const { thumbnail } = this.config;
-
   if (isPc && thumbnail) {
     thumbnailEL.style.width = `${thumbnail.width}px`;
     thumbnailEL.style.height = `${thumbnail.height}px`;
     thumbnailEL.style.backgroundPosition = `0px 0px;`;
     thumbnailEL.style.backgroundImage = `url('${thumbnail.url}')`;
   }
-
 
   /**
    * 监听播放进度
@@ -118,28 +122,26 @@ const skin_progress = function (this: Player) {
   ['touchstart', 'mousedown'].forEach((item: string) => {
     containerEl.addEventListener(item, (e: MouseEvent) => {
       e.stopPropagation()
-      const { width } = containerEl.getBoundingClientRect();
-      const left = e.clientX - paddingSkip;
-      const rate = `${(left / width) * 100}%`;
-      progressPlayed.style.width = rate;
-      btn.style.left = rate;
-
-      // if (left && width) {
-      //   this.video.currentTime = ((left / width) * this.duration);
-      // }
-
+      const { width, left } = containerEl.getBoundingClientRect();
 
       const move = (event) => {
         event.stopPropagation();
         this.isProgressMoving = true;
         const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-        const difference = clientX -  paddingSkip;
-        const ratio  = difference / width;
-        const moveTate = `${(ratio > 1 ? 100 : ratio) * 100}%`;
-        progressPlayed.style.width = moveTate;
-        btn.style.left = moveTate;
-        const moveTime = `${format((difference / width) * this.duration)}`
+        const tempMoveLeft: number = clientX -  left;
+        let moveLeft: number = tempMoveLeft;
 
+        if (tempMoveLeft < 0) {
+          moveLeft = 0;
+        } else if  (tempMoveLeft > width){
+          moveLeft = width;
+        } 
+        const moveTate = moveLeft / width
+        const ratio  = `${moveTate * 100}%`;
+        const moveTime = `${format(moveTate * this.duration)}`;
+        
+        progressPlayed.style.width = ratio;
+        btn.style.left = ratio;
         this.emit('progressMove', {
           updateState: false,
           moveTime
@@ -149,7 +151,7 @@ const skin_progress = function (this: Player) {
       const up = (event) => {
         event.stopPropagation();
         const clientX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-        this.video.currentTime = (clientX - paddingSkip) / width * this.duration;
+        this.video.currentTime = (clientX - left) / width * this.duration;
         this.isProgressMoving = false;
         window.removeEventListener('mousemove', move)
         window.removeEventListener('touchmove', move)
@@ -176,7 +178,7 @@ const skin_progress = function (this: Player) {
   containerEl.addEventListener('mouseenter', (e: MouseEvent) => {
     if (!deviceInfo.pc) { return }
 
-    const { width } = containerEl.getBoundingClientRect();
+    const { width,left } = containerEl.getBoundingClientRect();
 
     const pointWidth = pointContent.getBoundingClientRect().width;
     // 控制显示
@@ -191,25 +193,24 @@ const skin_progress = function (this: Player) {
      * @param event 
      */
     const move = (event: MouseEvent) => {
+      const moveLeft = event.clientX - left
       // 处理时间内容显示。
-      // -10是因为左右两侧 有10px padding 。
-      const left = event.clientX - paddingSkip;
-      const moveTime = `${format((left / width) * this.duration)}`
+      const moveTime = `${format((moveLeft / width) * this.duration)}`
 
       point.style.display = `block`;
       pointContent.textContent = moveTime;
-      point.style.left = `${left}px`;
+      point.style.left = `${moveLeft}px`;
       // 处理缩略图显示
       if (isPc && thumbnail) {
-        handleThumbnailBackgroundStyle(left);
+        handleThumbnailBackgroundStyle(moveLeft);
         // 设置滑动边界
-        if (handleBoundary(left, thumbnail.width)) {
-          thumbnailEL.style.left = `${left}px`;
-          pointContent.style.left = `${left}px`;
+        if (handleBoundary(moveLeft, thumbnail.width)) {
+          thumbnailEL.style.left = `${moveLeft}px`;
+          pointContent.style.left = `${moveLeft}px`;
         }
       } else {
-        if (handleBoundary(left, pointWidth)) {
-          pointContent.style.left = `${left}px`;
+        if (handleBoundary(moveLeft, pointWidth)) {
+          pointContent.style.left = `${moveLeft}px`;
         }
       }
     }
