@@ -1,0 +1,36 @@
+.barrageCanvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+
+.containerBarrageOpen {
+  .barrageStateOpen {
+    display: flex;
+  }
+  .barrageStateOff {
+    display: none;
+  }
+}
+
+.containerBarrageOff {
+  .barrageStateOpen {
+    display: none;
+  }
+  .barrageStateOff {
+    display: flex;
+  }
+}
+
+
+
+.barrageStateOpen,
+.barrageStateOff {
+  display: none;
+}

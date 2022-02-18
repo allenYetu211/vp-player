@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-21 18:49:46
  * @Descripttion: 
- * @LastEditTime: 2021-07-30 15:44:48
+ * @LastEditTime: 2022-02-18 14:01:09
  * @FilePath: /plugin-core/packages/xyplayer/src/controls/fullScreen/index.ts
  */
 
@@ -14,6 +14,7 @@ import { requestFullscreen, exitFullscreen } from './utils';
 
 
 const fullScreen = function () {
+  console.log('fullScreen')
   const onFullScreenBtnClick = () => {
     if (hasClass(this.root, style.fullscreen)) {
       removeClass(this.root, style.fullscreen);

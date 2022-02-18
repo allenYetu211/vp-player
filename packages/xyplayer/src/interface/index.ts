@@ -34,7 +34,16 @@ export interface configInterface {
   }
   isLive: boolean;
   isVod: boolean;
-  isMobile?: boolean
+  isMobile?: boolean;
+  barrage?: {
+    fontSize?: number;
+    defaultBarrageState?: boolean;
+    tracksLine?: number;
+    trackSpacing?: number;
+    textSpacing?: number;
+    cacheData?: number;
+  }
+
   // allowPlayAfterEnded?: boolean;
   // ended?: boolean;
 }

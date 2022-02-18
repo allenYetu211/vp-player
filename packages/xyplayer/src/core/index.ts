@@ -41,7 +41,6 @@ class Player extends Proxy {
       el: 'vp-container',
       cname: style.container,
     })
-    console.log('appendChild >>>> ');
     this.config.el.appendChild(videoContainer);
     this.root = videoContainer;
     this.controls = createDOM({

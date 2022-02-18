@@ -2,34 +2,26 @@
  * @Author: Allen OYang
  * @Date: 2021-09-13 15:31:30
  * @Descripttion:
- * @LastEditTime: 2022-01-04 14:59:00
+ * @LastEditTime: 2022-02-18 11:46:34
  * @FilePath: /plugin-core/packages/xyplayer_barrage/src/core/index.ts
  */
-
-/*
- * @Author: Allen OYang
- * @Date: 2021-08-18 10:26:18
- * @Descripttion:
- * @LastEditTime: 2021-08-26 14:30:16
- * @FilePath: /ts-vp/src/component/video-AntiScreenRecording/core/index.ts
- */
-
-
 
 import CanvasProxy from './canvas';
 
 
+const now = () => {
+	return window.performance ? window.performance.now() : new Date().getTime();
+}
 
-export interface videoBarrageType {
+interface videoBarrageType {
   fontSize?: number;
   defaultBarrageState?: boolean;
   tracksLine?: number;
   trackSpacing?: number;
   textSpacing?: number;
   cacheData?: number;
+  autoEmpty?: boolean;
 };
-
-
 interface MsgItem {
   value: string;
   top?: number;
@@ -47,13 +39,6 @@ interface CanvasProps extends videoBarrageType {
   defaultBarrageState?: boolean;
   cacheData?: number;
 }
-
-
-export const now = () => {
-  return window.performance ? window.performance.now() : new Date().getTime();
-}
-
-
 class BarrageCanvas extends CanvasProxy {
   private requestAnimationFrameId: any;
   private isRunning: boolean = false;
@@ -94,10 +79,14 @@ class BarrageCanvas extends CanvasProxy {
   }
 
   draw() {
+
     if (!this.isRunning) {
       return
     }
+
+
     this.ctx.clearRect(0, 0, this.width, this.height);
+
     /**
      *  如果当前滚动条数，不存在数据。
      *  缓存中也没有数据， 则停止动画。
@@ -109,6 +98,8 @@ class BarrageCanvas extends CanvasProxy {
       window.cancelAnimationFrame(this.requestAnimationFrameId);
     }
 
+    this.transferMsg();
+    
     // 根据内容展示
     this.tracks.forEach((track, index) => {
       if (track.length === 0) {
@@ -138,14 +129,26 @@ class BarrageCanvas extends CanvasProxy {
           this.ctx.restore();
         }
 
+        /**
+         * 弹幕轨道更改状态：
+         * 1. 出现前：  
+         * 2. 出现中：
+         * 3. 出现后：
+         */
         const currentLeft = msg.left + (msg.width || 0);
-        // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
-        if (currentLeft <= 0) {
-          delete track[msgIndex];
-          this.tracksCounts -= 1;
-          this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
+
+        // 滑动前
+        if (currentLeft < this.width + (msg.width || 0)) {
+          this.tracksState[index] = false;
+
+          // debounce(this.transferMsg, 100, {
+          //   'maxWait': 1000,
+          //   leading: true
+          // })
 
         }
+
+        // 滑动中，完全进入
         //  如果当前是轨道中最后一条，则检测是否展现完成 , 当前信息是否已经全部展现, 如果全部展示则添加新msg进来
         if (msgIndex === track.length - 1 && currentLeft < this.width) {
           /**
@@ -153,18 +156,43 @@ class BarrageCanvas extends CanvasProxy {
             *  if there is not data in the catch。change the catch states to true
             *  
             */
-          // 当前信息是否需已经全部展现, 如果全部展示则添加进来
-          if (this.cacheMsg.length !== 0) {
-            const firstMsg = this.cacheMsg.shift()
-            firstMsg.addTime = now();
-            this.tracks[index].push(firstMsg);
-            this.tracksCounts += 1;
-          }
+
+          // console.log(index, msgIndex, track.length , currentLeft , track[track.length - 1].value)
+          this.tracksState[index] = true;
         }
 
+
+
+        // 滑动后： 整体出去
+        // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
+        if (currentLeft <= 0) {
+          delete track[msgIndex];
+          this.tracksCounts -= 1;
+          this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
+        }
         renderMsg();
       })
     })
+  }
+
+
+ 
+
+  transferMsg() {
+    if (this.cacheMsg.length !== 0) {
+      for (let i = 0; i < this.tracksState.length; i++) {
+        // find the first current track that can be inserted
+        if (this.tracksState[i]) {
+          // currentCanBeInsertedTracksIndex = i;
+          const firstMsg = this.cacheMsg.shift();
+          firstMsg.addTime = now();
+          this.tracks[i].push(firstMsg);
+          this.tracksCounts += 1;
+          this.tracksState[i] = false;
+          break;
+        }
+      }
+    }
   }
 
   start() {
@@ -217,26 +245,37 @@ class BarrageCanvas extends CanvasProxy {
     }
 
 
-    let currentCanBeInsertedTracksIndex;
-    for (let i = 0; i < this.tracksState.length; i++) {
-      // find the first current track that can be inserted
-      if (this.tracksState[i]) {
-        currentCanBeInsertedTracksIndex = i;
-        msg.addTime = now();
-        this.tracks[i].push(msg);
-        this.tracksCounts += 1;
-        this.tracksState[i] = false;
-        break;
-      }
-    }
+
+
+    /**、
+     * 1. 默认添加至缓存中
+     * 2. 开始变量缓存中是否存在消息，  如果存在消息，轨道中不存在，则添加到轨道中。 
+     * 3. 添加条件：  
+     *   - 轨道中不存在， 则添加， 如果轨道中存在，
+     *   - 
+     */
 
     // 当前没有可以使用的tacks  则添加至缓冲区
-    if (!currentCanBeInsertedTracksIndex && currentCanBeInsertedTracksIndex !== 0) {
-      this.cacheMsg.push(msg);
-    }
+    // if (!currentCanBeInsertedTracksIndex && currentCanBeInsertedTracksIndex !== 0) {
+    //   this.cacheMsg.push(msg);
+    // }
 
     if (this.isRunning) {
+      this.cacheMsg.push(msg);
       return
+    } else {
+      // let currentCanBeInsertedTracksIndex;
+      for (let i = 0; i < this.tracksState.length; i++) {
+        // find the first current track that can be inserted
+        if (this.tracksState[i]) {
+          // currentCanBeInsertedTracksIndex = i;
+          msg.addTime = now();
+          this.tracks[i].push(msg);
+          this.tracksCounts += 1;
+          this.tracksState[i] = false;
+          break;
+        }
+      }
     }
     this.start();
   }

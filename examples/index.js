@@ -9,6 +9,9 @@
 
 const pl = document.querySelector('#video');
 
+
+const isMobile = true;
+
 const config = {
   thumbnail: {
     pic_num: 17,
@@ -41,7 +44,15 @@ const config = {
   //   defaultInit: 0
   // },
   isMobile: false,
-
+  barrage: {
+    fontSize: isMobile ? 16 : 20, // 字体大小
+    defaultBarrageState: true,
+    tracksLine: isMobile ? 2 : 3, // 弹幕轨道数
+    trackSpacing: isMobile ? 25 : 30, // 轨道间距
+    textSpacing: isMobile ? 10 : 20, // 弹幕间距
+    cacheData: 20,
+    autoEmpty: true,
+  }
 
 }
 

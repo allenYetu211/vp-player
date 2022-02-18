@@ -54,6 +54,7 @@
   "dependencies": {
     "@types/event-emitter": "^0.3.3",
     "classname": "^0.0.0",
-    "eventemitter3": "^4.0.7"
+    "eventemitter3": "^4.0.7",
+    "lodash.throttle": "^4.1.1"
   }
 }

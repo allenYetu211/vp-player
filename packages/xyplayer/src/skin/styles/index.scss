@@ -3,8 +3,8 @@
 :global {
   controls {
     svg {
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
     }
   }
 }
@@ -27,9 +27,15 @@
   overflow: hidden;
 }
 
+.showControlBar {
+  .controls {
+    display: flex;
+  }
+}
+
 .controls {
   height: 40px;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   background-color: $controls-background;
@@ -97,14 +103,7 @@
   }
 }
 
-// .iconPlay,
-// .tipPlay {
-//   display: none;
-// }
-// .iconPause,
-// .tipPause {
-//   display: block;
-// }
+
 
 // 功能开关键控制
 .playing {
@@ -127,6 +126,9 @@
     }
   }
 }
+
+
+
 
 .fullscreen {
   .iconFullscreen,
@@ -192,7 +194,7 @@
 /***
 * 
   1. loading
-**/ 
+**/
 .isloading {
   .playCenter {
     display: none;
