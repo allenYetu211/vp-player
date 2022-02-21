@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-22 09:07:56
  * @Descripttion: 
- * @LastEditTime: 2022-01-17 16:27:27
+ * @LastEditTime: 2022-02-21 18:05:46
  * @FilePath: /plugin-core/packages/xyplayer_hls/src/index.ts
  */
 
@@ -14,8 +14,9 @@ import Hls from 'hls.js';
 
 class playerHLS extends XYPlayer {
 
-  hls: Hls;
-  url: string = '';
+  public hls: Hls;
+  public url: string = '';
+  public type: string = 'hls';
 
   private timestampUnit: boolean | string = 't';
 

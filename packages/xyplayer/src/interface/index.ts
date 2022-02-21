@@ -42,6 +42,7 @@ export interface configInterface {
     trackSpacing?: number;
     textSpacing?: number;
     cacheData?: number;
+    autoEmpty?: boolean;
   }
 
   // allowPlayAfterEnded?: boolean;

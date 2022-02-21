@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-06-22 09:03:42
  * @Descripttion: 
- * @LastEditTime: 2022-02-17 19:50:52
+ * @LastEditTime: 2022-02-21 16:24:17
  * @FilePath: /plugin-core/examples/index.js
  */
 
@@ -43,11 +43,11 @@ const config = {
   //   }],
   //   defaultInit: 0
   // },
-  isMobile: false,
+  isMobile: true,
   barrage: {
     fontSize: isMobile ? 16 : 20, // 字体大小
-    defaultBarrageState: true,
-    tracksLine: isMobile ? 2 : 3, // 弹幕轨道数
+    defaultBarrageState: false,
+    tracksLine: isMobile ? 5 : 5, // 弹幕轨道数
     trackSpacing: isMobile ? 25 : 30, // 轨道间距
     textSpacing: isMobile ? 10 : 20, // 弹幕间距
     cacheData: 20,
@@ -57,6 +57,16 @@ const config = {
 }
 
 const player = new XYPlayer(config);
+
+let count = 0;
+setInterval(() => {
+  count += 1;
+  player.emit('barrage_push', {
+    value: `${count} ： 测试应用`,
+    speed: 5,
+})
+}, 50)
+
 
 // player.emit('antiScreenRecording_start', {
 //   fontSize: 36,

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-21 18:43:16
  * @Descripttion: 
- * @LastEditTime: 2021-09-03 17:30:57
+ * @LastEditTime: 2022-02-21 11:25:10
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/controls/fullScreen/index.ts
  */
 
@@ -17,18 +17,18 @@ import { createDOM, findDom } from '@/util';
 import requestFull from '@/skin/assets/iconrequestFull.svg';
 import exitFullIcon from '@/skin/assets/iconexitFull.svg';
 
-import style from '@/skin/styles/index.scss';
+import publicStyle from '@/skin/styles/index.scss';
 import cn from 'classname';
 
 const skin_fullScreen = function () {
 
   const btnEl: Element = createDOM({
     el: 'vp-fullScreen',
-    tpl: `<div class="${style.icon}">
-    <div class="${cn(style.iconFullscreen, style.iconSwitch1)}">${requestFull}</div>
-    <div class="${cn(style.iconExitFullscreen, style.iconSwitch2)}">${exitFullIcon}</div>
-   </div>`,
-    cname: style.operate
+    tpl: `
+    <div class="${cn( publicStyle.iconFullscreen,  publicStyle.iconSwitch1)}">${requestFull}</div>
+    <div class="${cn( publicStyle.iconExitFullscreen,  publicStyle.iconSwitch2)}">${exitFullIcon}</div>
+   `,
+    cname:  cn(publicStyle.operate,  publicStyle.controlsItemContent)
   })
 
 
@@ -38,9 +38,9 @@ const skin_fullScreen = function () {
 
   const tips = createDOM({
     el: 'vp-tip',
-    tpl: `<span class="${cn(style.tipFullscreen, style.tipSwitch1)}">${tipsText.fullscreen}</span>
-    <span class="${cn(style.tipExitFullscreen, style.tipSwitch2)}">${tipsText.exitfullscreen}</span>`,
-    cname: style.tips,
+    tpl: `<span class="${cn( publicStyle.tipFullscreen,  publicStyle.tipSwitch1)}">${tipsText.fullscreen}</span>
+    <span class="${cn( publicStyle.tipExitFullscreen,  publicStyle.tipSwitch2)}">${tipsText.exitfullscreen}</span>`,
+    cname:  publicStyle.tips,
   })
 
   btnEl.appendChild(tips);

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:39:25
  * @Descripttion:
- * @LastEditTime: 2022-02-16 17:46:50
+ * @LastEditTime: 2022-02-21 19:21:30
  * @FilePath: /plugin-core/packages/xyplayer_react/src/index.tsx
  */
 import * as React from 'react';
@@ -15,12 +15,12 @@ import { initConfig } from './interface';
 
 import { configInterface } from 'xyplayer/lib/interface/index';
 
+
 const PlayerComponents = (config: initConfig): JSX.Element => {
 
-  const player = React.useRef<XYPlayerHLS>();
+  const player = React.useRef<XYPlayerHLS  | XYPlayerFlv>();
 
   React.useEffect(() => {
-    console.log('config init::')
     const newConfig: configInterface = Object.assign({}, transformInjectParam(config),
       {
         el: videoContentEl.current,
@@ -35,6 +35,34 @@ const PlayerComponents = (config: initConfig): JSX.Element => {
     }
 
     player.current = new types[config.type](newConfig);
+
+
+    
+    player.current.mountFunction = {
+      barrage: {
+        push: (value) => {
+          player.current.emit('barrage_push', value)
+        },
+        start:() => {
+          player.current.emit('barrage_start')
+        },
+        clean:() => {
+          player.current.emit('barrage_clean')
+        },
+        open:() => {
+          player.current.emit('barrage_open')
+        },
+        resetView:() => {
+          player.current.emit('barrage_reset_view')
+        },
+        onChangePlayIndex: () => {
+        }
+      }
+    }
+
+    if (config.onVideoPlayerState)  {
+      config.onVideoPlayerState(player.current)
+    }
   }, []);
 
   const videoContentEl = React.useRef(null);

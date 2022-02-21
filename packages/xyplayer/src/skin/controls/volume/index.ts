@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-02 10:25:22
  * @Descripttion:
- * @LastEditTime: 2021-09-16 17:22:30
+ * @LastEditTime: 2022-02-21 11:24:45
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/volume/index.ts
  */
 
@@ -11,13 +11,13 @@ import { createDOM, findDom } from '@/util';
 import cn from 'classname';
 import volumeLarge from '@/skin/assets/iconvolumeLarge.svg';
 import volumeMuted from '@/skin/assets/iconvolumeMuted.svg';
-import cstyle from './index.scss';
-import style from '@/skin/styles/index.scss';
+import style from './index.scss';
+import publicStyle from '@/skin/styles/index.scss';
 import deviceInfo from '@/util/deviceInfo';
 
 const isPC = deviceInfo.pc;
 
-// <div class="${cn(style.iconPlay, style.iconSwitch1)}">${VolumeSmall}</div>
+// <div class="${cn(publicStyle.iconPlay, publicStyle.iconSwitch1)}">${VolumeSmall}</div>
 
 const skip_volume = function (this: Player) {
 
@@ -26,19 +26,19 @@ const skip_volume = function (this: Player) {
    */
   const btnContainerEL: Element = createDOM({
     el: 'vp-volume',
-    cname: cstyle.volume,
+    cname: cn(style.volume, publicStyle.controlsItemContent),
     tpl: `
-        <div class="vp_volumeLarge ${cn(style.iconSwitch1)}">${volumeLarge}</div>
-        <div class="vp_volumeMuted ${cn(style.iconSwitch2)}">${volumeMuted}</div>
+        <div class="vp_volumeLarge ${cn(publicStyle.iconSwitch1)}">${volumeLarge}</div>
+        <div class="vp_volumeMuted ${cn(publicStyle.iconSwitch2)}">${volumeMuted}</div>
     `,
   });
   const volumeEL = createDOM({
     el: 'vp-volume-content',
-    cname: cstyle.volumeContent,
+    cname: style.volumeContent,
     tpl: `
         <vp-volume-text>${(this.volume * 100)}%</vp-volume-text>
-        <vp-volume-bar class="${cstyle.volumeBar}">
-          <vp-volume-drag  class="${cstyle.volumeDrag}"></vp-volume-drag>
+        <vp-volume-bar class="${style.volumeBar}">
+          <vp-volume-drag  class="${style.volumeDrag}"></vp-volume-drag>
         </vp-volume-bar>
     `
   });

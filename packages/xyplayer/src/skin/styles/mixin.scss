@@ -4,3 +4,11 @@
   top: $top;
   transform: translate($tl, $tt);
 }
+
+
+@mixin flex {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+
+}

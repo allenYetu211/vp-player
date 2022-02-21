@@ -3,7 +3,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-22 09:07:56
  * @Descripttion: 
- * @LastEditTime: 2022-02-18 16:31:30
+ * @LastEditTime: 2022-02-21 19:12:08
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/barrage/index.ts
  */
 
@@ -11,6 +11,7 @@
 import Player from '@/core';
 import BarrageCanvas from './core';
 import { addClass, createDOM, findDom } from '@/util';
+import debounce from 'lodash.debounce';
 
 import barrageOpen from '@/skin/assets/barrageOpen.svg';
 import barrageClean from '@/skin/assets/barrageClean.svg';
@@ -22,22 +23,21 @@ import publicStyle from '@/skin/styles/index.scss';
 
 const plugin_barrageCanvas = function (this: Player) {
 
+  let barrageClass: BarrageCanvas;
+
   if (!this.config.barrage) {
     return
   }
 
   const {
     defaultBarrageState,
+    autoEmpty = true
   } = this.config.barrage;
 
 
   const canvasEL: any = createDOM({
     el: 'canvas',
-    cname: style.barrageCanvas,
-    attrs: {
-      height: '100%',
-      width: '100%',
-    }
+    cname: style.barrageCanvas
   });
 
   const barrageEL: Element = createDOM({
@@ -45,39 +45,62 @@ const plugin_barrageCanvas = function (this: Player) {
     tpl: `
       <div class="${cn(style.barrageStateOpen)}">${barrageOpen}</div>
       <div class="${cn(style.barrageStateOff)}">${barrageClean}</div>`,
-    cname: `${publicStyle.operate}`
+    cname: `${publicStyle.operate, publicStyle.controlsItemContent}`
   });
-
-  // 初始弹幕
-  let barrage: BarrageCanvas;
 
   this.on('ready', () => {
     const controlsRight = findDom(this.controls, 'vp-controls-right');
     controlsRight.appendChild(barrageEL);
     this.root.appendChild(canvasEL);
-    addClass(this.root, defaultBarrageState ? style.containerBarrageOpen : style.containerBarrageClean);
+    addClass(this.root, defaultBarrageState ? style.containerBarrageOpen : style.containerBarrageOff);
+    barrageClass =  new BarrageCanvas({ element: canvasEL, ...this.config.barrage });
+
+    if (autoEmpty) {
+      //  监听窗口大小变化
+      window!.addEventListener('resize', debounce(() => {
+        console.log('窗口发生改变')
+        resetView();
+      }, 300))
+    }
+
+   
   })
 
+  // 重置窗口
+  const resetView = () => {
+    const { offsetWidth: contentWidth } = this.root;
+
+    canvasEL.style.width = `${contentWidth}px`;
+    canvasEL.setAttribute('width', `${contentWidth}`);
+    barrageClass.resetCanvas();
+    barrageClass.restart();
+  }
+
   // 开始弹幕
-  this.on('barrage_start', (barrageConfig: any) => {
-    barrage = new BarrageCanvas({ element: canvasEL, ...barrageConfig });
-    barrage.start();
+  this.on('barrage_start', () => {
+    barrageClass.start();
   })
 
   // 添加弹幕信息
   this.on('barrage_push', (value) => {
-    barrage.pushBarrage(value);
+    barrageClass.pushBarrage(value[0]);
   })
 
   // 清除弹幕
   this.on('barrage_clean', () => {
-    barrage.clean();
+    barrageClass.clean();
   })
 
   // 开始弹幕
   this.on('barrage_open', () => {
-    barrage.open();
+    barrageClass.open();
   });
+
+  // 重置窗口
+  this.on('barrage_reset_view', () => {
+    resetView();
+  });
+
 
 
   ['click', 'touchend'].forEach((item) => {

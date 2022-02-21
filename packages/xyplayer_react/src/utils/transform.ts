@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 10:41:41
  * @Descripttion:
- * @LastEditTime: 2022-02-16 14:53:21
+ * @LastEditTime: 2022-02-21 17:47:13
  * @FilePath: /plugin-core/packages/xyplayer_react/src/utils/transform.ts
  */
 
@@ -51,6 +51,12 @@ export const transformInjectParam = (config: Partial<initConfig>): configInterfa
       url: [config!.thumbnail.picture]
     }
   }
+
+  if (config.videoBarrage) {
+    newObj['barrage'] = config.videoBarrage;
+  }
+
+  
 
   if (config.src) {
     newObj['url'] = config.src;

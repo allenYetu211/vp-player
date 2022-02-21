@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-08 09:26:17
  * @Descripttion:
- * @LastEditTime: 2022-02-16 17:20:35
+ * @LastEditTime: 2022-02-21 11:27:11
  * @FilePath: /plugin-core/packages/xyplayer/src/skin/constrols/doubleSpeed/index.ts
  */
 /**
@@ -14,12 +14,11 @@ import { createDOM, findDom, removeClass, addClass } from '@/util';
 import cn from 'classname';
 import style from './style.scss';
 import globalStyle from '@/skin/styles/global.scss';
+import publicStyle from '@/skin/styles/index.scss';
 
 
 const skin_doubleSpeed = function (this: Player) {
   const { playbackRate } = this.config;
-
-  console.log('playbackRate', playbackRate);
 
   if (!playbackRate) { return };
 
@@ -54,8 +53,8 @@ const skin_doubleSpeed = function (this: Player) {
   temp.push(`</ul><div class="${cn(style.currentPitchOn)}">${currentPitchOn}</div>`);
 
   const container = createDOM({
-    el: 'v-playback',
-    cname: cn(style.container, globalStyle.floatLayerTipUiTrigger)
+    el: 'vp-playback',
+    cname: cn(style.container, globalStyle.floatLayerTipUiTrigger, publicStyle.controlsItemContent)
   })
 
   container.innerHTML = temp.join('');

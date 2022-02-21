@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-13 15:31:30
  * @Descripttion:
- * @LastEditTime: 2022-02-18 11:46:34
+ * @LastEditTime: 2022-02-21 15:06:12
  * @FilePath: /plugin-core/packages/xyplayer_barrage/src/core/index.ts
  */
 
@@ -76,6 +76,10 @@ class BarrageCanvas extends CanvasProxy {
     this.tracksConfig = {
       fontSize, defaultBarrageState, tracksLine: useTrackCount, trackSpacing, textSpacing, cacheData
     };
+
+    console.log(' Track State Count');
+
+    
   }
 
   draw() {
@@ -111,7 +115,7 @@ class BarrageCanvas extends CanvasProxy {
         if (!msg) {
           return
         }
-        const renderMsg = (width: number = 0) => {
+        const renderMsg = () => {
           // 从添加到屏幕右侧边缘到现在的时间差值
           const timeDiff = now() - msg.addTime;
           // 弹幕向左侧的移动距离S ＝ V（速度）× T（时间）
@@ -216,11 +220,9 @@ class BarrageCanvas extends CanvasProxy {
     speed?: number,
     viewableArea?: number
   }) {
-
     if (this.isClose || this.cacheMsg.length > this.tracksConfig.cacheData!) {
       return
     }
-
     /**
      * 添加一个缓存区
      * 记录每一条轨道的状态： 在初始阶段，如果轨道不存在msg，则添加，添加后则将msg存储至缓存区。

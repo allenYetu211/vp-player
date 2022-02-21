@@ -17,11 +17,13 @@ const play = function  (this: Player) {
     //   return
     // }
     if (this.paused) {
+      this.emit('play');
       let playPromise = this.play()
       if (playPromise !== undefined && playPromise) {
         playPromise.catch(err => { })
       }
     } else {
+      this.emit('stop');
       this.pause()
     }
   }

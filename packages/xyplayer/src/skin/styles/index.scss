@@ -1,4 +1,6 @@
 @import './variable.scss';
+@import './mixin.scss';
+
 
 :global {
   controls {
@@ -7,6 +9,12 @@
       height: 22px;
     }
   }
+}
+
+.controlsItemContent {
+  box-sizing: border-box;
+  width: 40px;
+  @include flex;
 }
 
 .playerInfo {
@@ -45,6 +53,7 @@
   right: 0;
   bottom: 0;
   padding: 0 10px;
+  z-index: 10;
   box-sizing: border-box;
 }
 
@@ -53,13 +62,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  & > vp-play,
-  & > vp-play-time,
-  & > vp-multiresolution,
-  & > vp-volume,
-  & > vp-fullscreen {
-    padding: 0 5px;
-  }
+  // & > vp-play,
+  // & > vp-play-time,
+  // & > vp-multiresolution,
+  // & > vp-volume,
+  // & > vp-fullscreen {
+  //   padding: 0 5px;
+  // }
 }
 
 .tipSwitch1,

@@ -1,21 +1,20 @@
 /*
  * @Author: Allen OYang
  * @Date: 2022-02-18 11:56:08
- * @LastEditTime: 2022-02-18 14:16:04
+ * @LastEditTime: 2022-02-21 16:23:50
  */
-
 
 import Player from '@/core';
 import throttle from 'lodash.throttle';
 import { addClass, removeClass } from '@/util';
 import style from '@/skin/styles/index.scss';
 
-
 const controlBar = function (this: Player) {
   let mouseTimer;
+
   this.root.addEventListener('mousemove',
     throttle(() => {
-      clearTimeout(mouseTimer);
+      clearTimeout(mouseTimer)
       addClass(this.root, style.showControlBar)
       mouseTimer = setTimeout(() => {
         removeClass(this.root, style.showControlBar)
