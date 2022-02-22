@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:39:25
  * @Descripttion:
- * @LastEditTime: 2022-02-21 19:21:30
+ * @LastEditTime: 2022-02-22 11:19:25
  * @FilePath: /plugin-core/packages/xyplayer_react/src/index.tsx
  */
 import * as React from 'react';

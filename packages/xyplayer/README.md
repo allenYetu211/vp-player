@@ -1,10 +1,5 @@
-<!--
- * @Author: Allen OYang
- * @Date: 2021-06-22 09:00:56
- * @Descripttion: 
- * @LastEditTime: 2021-06-30 10:37:27
- * @FilePath: /plugin-template/README.md
--->
+### 播放器核心
+
 ### 使用
 
 
@@ -13,7 +8,6 @@
 访问： [http://localhost:3000](http://localhost:3000)
 
 编译： **yarn build**
-
 
 
 ---

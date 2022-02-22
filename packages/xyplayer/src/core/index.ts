@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2022-02-21 19:20:47
+ * @LastEditTime: 2022-02-21 21:05:53
  * @FilePath: /plugin-core/packages/xyplayer/src/core/index.ts
  */
 
@@ -22,7 +22,7 @@ class Player extends Proxy {
        [child: string]: <T>(arg: T) => void 
     }
   }
-  public controls: HTMLElement = null // 控制器
+  public controls  = null // 控制器
   public canPlayFunc // 播放函数
   public videoConfig = {  // 播放器基础配置
   ignores: [],

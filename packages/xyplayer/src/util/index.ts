@@ -36,7 +36,7 @@ export const createDOM = ({
   return dom;
 }
 
-export const findDom = (el = document, sel) => {
+export const findDom = (el = document , sel) => {
   let dom;
   try {
     dom = el.querySelector(sel);
