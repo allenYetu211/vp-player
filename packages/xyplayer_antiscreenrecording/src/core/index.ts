@@ -2,19 +2,9 @@
  * @Author: Allen OYang
  * @Date: 2021-09-13 15:31:30
  * @Descripttion:
- * @LastEditTime: 2021-09-13 15:33:33
+ * @LastEditTime: 2022-02-22 16:16:56
  * @FilePath: /plugin-core/packages/xyplayer_antiscreenrecording/src/core/index.ts
  */
-
-/*
- * @Author: Allen OYang
- * @Date: 2021-08-18 10:26:18
- * @Descripttion:
- * @LastEditTime: 2021-08-26 14:30:16
- * @FilePath: /ts-vp/src/component/video-AntiScreenRecording/core/index.ts
- */
-
-
 
 import CanvasProxy from './canvas';
 import { Type } from 'src';

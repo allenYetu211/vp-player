@@ -1,14 +1,14 @@
 /*
  * @Author: Allen OYang
  * @Date: 2022-02-16 10:25:40
- * @LastEditTime: 2022-02-21 19:15:29
+ * @LastEditTime: 2022-02-22 16:03:17
  */
 
-import XYPlayer from 'xyplayer';
+import Player from '@xylink/xyplayer';
 import FlvJs from 'flv.js';
 
 
-class playerFLV extends XYPlayer {
+class playerFLV extends Player {
 
   public flv;
   public url: string = '';

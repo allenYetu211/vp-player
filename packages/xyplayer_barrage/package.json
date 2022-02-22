@@ -1,5 +1,5 @@
 {
-  "name": "xyplayer_barrage",
+  "name": "@xylink/xyplayer_barrage",
   "version": "0.1.1",
   "main": "lib/index.umd.js",
   "types": "lib/index.d.ts",

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-02 16:25:06
  * @Descripttion: 
- * @LastEditTime: 2022-02-21 21:05:53
+ * @LastEditTime: 2022-02-22 16:06:07
  * @FilePath: /plugin-core/packages/xyplayer/src/core/index.ts
  */
 

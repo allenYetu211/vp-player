@@ -2,18 +2,18 @@
  * @Author: Allen OYang
  * @Date: 2021-09-23 09:39:25
  * @Descripttion:
- * @LastEditTime: 2022-02-22 11:19:25
+ * @LastEditTime: 2022-02-22 16:15:53
  * @FilePath: /plugin-core/packages/xyplayer_react/src/index.tsx
  */
 import * as React from 'react';
-import XYPlayerHLS from 'xyplayer_hls';
-import XYPlayerFlv from 'xyplayerflv';
+import XYPlayerHLS from '@xylink/xyplayer_hls';
+import XYPlayerFlv from '@xylink/xyplayer_flv';
 
 import { transformInjectParam } from './utils/transform';
 import { isLive } from './utils/getConfigInfo';
 import { initConfig } from './interface';
 
-import { configInterface } from 'xyplayer/lib/interface/index';
+import { configInterface } from '@xylink/xyplayer/lib/interface/index';
 
 
 const PlayerComponents = (config: initConfig): JSX.Element => {

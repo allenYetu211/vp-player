@@ -2,15 +2,13 @@
  * @Author: Allen OYang
  * @Date: 2021-07-22 09:07:56
  * @Descripttion: 
- * @LastEditTime: 2022-02-21 18:05:46
+ * @LastEditTime: 2022-02-22 16:06:54
  * @FilePath: /plugin-core/packages/xyplayer_hls/src/index.ts
  */
 
 
-import XYPlayer from 'xyplayer';
+import XYPlayer from '@xylink/xyplayer';
 import Hls from 'hls.js';
-
-
 
 class playerHLS extends XYPlayer {
 

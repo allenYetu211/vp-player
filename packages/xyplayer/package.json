@@ -1,5 +1,5 @@
 {
-  "name": "xyplayer",
+  "name": "@xylink/xyplayer",
   "version": "0.1.2",
   "main": "lib/index.umd.js",
   "types": "lib/index.d.ts",

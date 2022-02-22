@@ -7,7 +7,7 @@
  */
 
 
-import Player from 'xyplayer';
+import Player from '@xylink/xyplayer';
 import style from './index.scss';
 
 import AntiScreenRecording from './core';

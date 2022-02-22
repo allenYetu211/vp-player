@@ -1,5 +1,5 @@
 {
-  "name": "xyplayer_antiscreenrecording",
+  "name": "@xylink/xyplayer_antiscreenrecording",
   "version": "0.1.0",
   "main": "lib/index.umd.js",
   "types": "lib/index.d.ts",
